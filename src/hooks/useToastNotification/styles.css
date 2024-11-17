@@ -1,0 +1,119 @@
+.notification {
+    padding: 15px;
+    margin: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    
+    /* animation: popOut 5s ease-in ; */
+}
+.slidein-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+.slidein-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.notification::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    animation: loader var(--animation-duration, 3s) linear 0s forwards;
+    background-color: #888;
+}
+
+@keyframes popOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes loader {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width : 0;
+    }
+}
+
+
+.success {
+    background-color: #4caf50;
+}
+.danger {
+    background-color: #f44336;
+}
+
+.info {
+    background-color: #2196f3;
+}
+.warning {
+    background-color: #ff9800;
+}
+
+.top-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.top-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.bottom-right {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.bottom-left {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+.close-icon {
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.close-icon:hover {
+    color: #000;
+}
