@@ -12,6 +12,6 @@ const router = createBrowserRouter([
             element: <ToastNotification />
         }]
     }
-])
+], {basename: "/LLD-Projects"})
 
 export default router
