@@ -34469,14 +34469,12 @@ var _app = require("../App");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _toastNotification = require("../projects/toastNotification");
 var _toastNotificationDefault = parcelHelpers.interopDefault(_toastNotification);
-const basename = undefined;
-console.log("base::", basename);
 const router = (0, _reactRouterDom.createBrowserRouter)([
     {
         path: "/",
         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appDefault.default), {}, void 0, false, {
             fileName: "src/routes/index.tsx",
-            lineNumber: 13,
+            lineNumber: 9,
             columnNumber: 19
         }, undefined),
         children: [
@@ -34484,7 +34482,7 @@ const router = (0, _reactRouterDom.createBrowserRouter)([
                 path: 'toast-notification',
                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toastNotificationDefault.default), {}, void 0, false, {
                     fileName: "src/routes/index.tsx",
-                    lineNumber: 16,
+                    lineNumber: 12,
                     columnNumber: 22
                 }, undefined)
             }
