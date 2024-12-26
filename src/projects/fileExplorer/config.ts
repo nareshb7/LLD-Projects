@@ -54,19 +54,19 @@ export const explorer: FolderInterface = {
       ],
     },
     {
-      id: 6,
+      id: 9,
       name: "File 1-3",
       isFolder: false,
       children: [],
     },
     {
-      id: 7,
+      id: 10,
       name: "File 1-3",
       isFolder: false,
       children: [],
     },
     {
-      id: 8,
+      id:11,
       name: "File 1-3",
       isFolder: false,
       children: [],
