@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { projectsConfig } from "./config";
+import { projectsConfig } from "../../routes/config";
 
 const Navbar = () => {
   return (

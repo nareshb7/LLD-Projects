@@ -1,0 +1,56 @@
+.folder {
+    cursor: pointer;
+    background-color: #ccc;
+    margin-top: 6px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    position: relative;
+}
+.folder .show-popup-btn {
+    padding: 5px;
+    background-color: #888;
+}
+.btns-section {
+    position: absolute;
+    right: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    top: 10px;
+    z-index: 1;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.btns-section >button {
+    border: none;
+    padding-inline: 4px;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+.selected {
+    box-shadow: 1px 0px 4px 1px  rgba(0,0,3,0.6);
+}
+
+
+.file {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    padding-left: 5px;
+    position: relative;
+    width: 300px;
+    background-color: #eee;
+}
+.folder-name {
+    max-width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
