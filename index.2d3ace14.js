@@ -34467,26 +34467,20 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
 var _app = require("../App");
 var _appDefault = parcelHelpers.interopDefault(_app);
-var _toastNotification = require("../projects/toastNotification");
-var _toastNotificationDefault = parcelHelpers.interopDefault(_toastNotification);
+var _config = require("./config");
+const projectRoutes = (0, _config.projectsConfig).map(({ path, Component })=>({
+        path,
+        Component
+    }));
 const router = (0, _reactRouterDom.createBrowserRouter)([
     {
         path: "/",
         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appDefault.default), {}, void 0, false, {
             fileName: "src/routes/index.tsx",
-            lineNumber: 9,
+            lineNumber: 11,
             columnNumber: 19
         }, undefined),
-        children: [
-            {
-                path: 'toast-notification',
-                element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toastNotificationDefault.default), {}, void 0, false, {
-                    fileName: "src/routes/index.tsx",
-                    lineNumber: 12,
-                    columnNumber: 22
-                }, undefined)
-            }
-        ]
+        children: projectRoutes
     }
 ], {
     basename: "/LLD-Projects"
@@ -34498,7 +34492,7 @@ exports.default = router;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","../App":"7F5Te","../projects/toastNotification":"eJpmq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7F5Te":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","../App":"7F5Te","./config":"b8mas","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7F5Te":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$0342 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -34515,7 +34509,6 @@ var _navbar = require("./pages/navbar");
 var _navbarDefault = parcelHelpers.interopDefault(_navbar);
 const App = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "main-app check",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarDefault.default), {}, void 0, false, {
                 fileName: "src/App.tsx",
@@ -34557,7 +34550,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
-var _config = require("./config");
+var _config = require("../../routes/config");
 const Navbar = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("nav", {
         className: "navbar navbar-expand-lg navbar-dark bg-dark",
@@ -34646,19 +34639,385 @@ $RefreshReg$(_c, "Navbar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./config":"7XIWX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7XIWX":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","../../routes/config":"b8mas","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"b8mas":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "projectsConfig", ()=>projectsConfig);
+var _fileExplorer = require("../projects/fileExplorer");
+var _fileExplorerDefault = parcelHelpers.interopDefault(_fileExplorer);
+var _toastNotification = require("../projects/toastNotification");
+var _toastNotificationDefault = parcelHelpers.interopDefault(_toastNotification);
 const projectsConfig = [
     {
         id: 1,
         name: "Toast Notification",
-        path: "toast-notification"
+        path: "toast-notification",
+        Component: (0, _toastNotificationDefault.default)
+    },
+    {
+        id: 2,
+        name: "File Explorer",
+        path: 'file-explorer',
+        Component: (0, _fileExplorerDefault.default)
     }
 ];
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"km3Ru":[function(require,module,exports,__globalThis) {
+},{"../projects/fileExplorer":"lRtDB","../projects/toastNotification":"eJpmq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lRtDB":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$16a7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$16a7.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _useOutsideClick = require("../../hooks/useOutsideClick");
+var _useOutsideClickDefault = parcelHelpers.interopDefault(_useOutsideClick);
+var _useTraverseTree = require("../../hooks/useTraverseTree");
+var _useTraverseTreeDefault = parcelHelpers.interopDefault(_useTraverseTree);
+var _config = require("./config");
+var _folder = require("./Folder");
+var _folderDefault = parcelHelpers.interopDefault(_folder);
+var _styleCss = require("./style.css");
+var _s = $RefreshSig$();
+const FileExplorer = ()=>{
+    _s();
+    const [explorerData, setExplorerData] = (0, _react.useState)((0, _config.explorer));
+    const ref = (0, _react.useRef)(null);
+    const [showPopup, setShowPopup] = (0, _react.useState)(null);
+    const { insertNode, deleteNode, renameNode } = (0, _useTraverseTreeDefault.default)();
+    (0, _useOutsideClickDefault.default)(ref.current, ()=>setShowPopup(null));
+    const updateData = (latestData)=>{
+        setExplorerData({
+            ...latestData
+        });
+        localStorage.setItem("folders", JSON.stringify(latestData));
+    };
+    const onAddNew = (folderId, name, isFolder)=>{
+        const latestData = insertNode(explorerData, folderId, name, isFolder);
+        updateData(latestData);
+    };
+    const onDelete = (folderId)=>{
+        const latestData = deleteNode(explorerData, folderId);
+        if (latestData) updateData(latestData || {});
+    };
+    const onRename = (folderId, newName)=>{
+        const latestData = renameNode(explorerData, folderId, newName);
+        updateData(latestData);
+    };
+    (0, _react.useEffect)(()=>{
+        const prevData = localStorage.getItem("folders");
+        if (prevData) {
+            const data = JSON.parse(prevData);
+            setExplorerData(data);
+        }
+    }, []);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "FileExplorer"
+            }, void 0, false, {
+                fileName: "src/projects/fileExplorer/index.tsx",
+                lineNumber: 51,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _folderDefault.default), {
+                ref: ref,
+                explorer: explorerData,
+                setShowPopup: setShowPopup,
+                showPopup: showPopup,
+                handleAddNew: onAddNew,
+                onDelete: onDelete,
+                onRename: onRename
+            }, void 0, false, {
+                fileName: "src/projects/fileExplorer/index.tsx",
+                lineNumber: 53,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/projects/fileExplorer/index.tsx",
+        lineNumber: 50,
+        columnNumber: 5
+    }, undefined);
+};
+_s(FileExplorer, "8948e4ru2nLhAHpuKuFpIfFvc5Q=", false, function() {
+    return [
+        (0, _useTraverseTreeDefault.default),
+        (0, _useOutsideClickDefault.default)
+    ];
+});
+_c = FileExplorer;
+exports.default = FileExplorer;
+var _c;
+$RefreshReg$(_c, "FileExplorer");
+
+  $parcel$ReactRefreshHelpers$16a7.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./config":"kFzhr","./Folder":"8BsZG","./style.css":"jQsCS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../hooks/useTraverseTree":"fyS5D","../../hooks/useOutsideClick":"dkMPB"}],"kFzhr":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "explorer", ()=>explorer);
+const explorer = {
+    id: 1,
+    name: "Root",
+    isFolder: true,
+    children: [
+        {
+            id: 2,
+            name: "Folder 1 -0",
+            isFolder: true,
+            children: []
+        },
+        {
+            id: 3,
+            name: "Folder 1-1",
+            isFolder: true,
+            children: [
+                {
+                    id: 4,
+                    name: "Folder 2 -0",
+                    isFolder: true,
+                    children: []
+                },
+                {
+                    id: 5,
+                    name: "Folder 2-1",
+                    isFolder: true,
+                    children: []
+                },
+                {
+                    id: 6,
+                    name: "File 1-3",
+                    isFolder: false,
+                    children: []
+                },
+                {
+                    id: 7,
+                    name: "File 1-3",
+                    isFolder: false,
+                    children: []
+                },
+                {
+                    id: 8,
+                    name: "File 1-3",
+                    isFolder: false,
+                    children: []
+                }
+            ]
+        },
+        {
+            id: 6,
+            name: "File 1-3",
+            isFolder: false,
+            children: []
+        },
+        {
+            id: 7,
+            name: "File 1-3",
+            isFolder: false,
+            children: []
+        },
+        {
+            id: 8,
+            name: "File 1-3",
+            isFolder: false,
+            children: []
+        }
+    ]
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8BsZG":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$d42e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$d42e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _folderName = require("./components/FolderName");
+var _util = require("./utils/util");
+var _s = $RefreshSig$();
+const Folder = /*#__PURE__*/ (0, _react.forwardRef)(_s(({ explorer, showPopup, setShowPopup, handleAddNew, onDelete, onRename }, ref)=>{
+    _s();
+    const popupRef = (0, _react.useRef)(null);
+    const [isExpanded, setIsExpanded] = (0, _react.useState)(false);
+    const [showInput, setShowInput] = (0, _react.useState)({
+        visible: false,
+        isFolder: true
+    });
+    const [isNameUpdating, setIsNameUpdating] = (0, _react.useState)(false);
+    const onAddNew = (e)=>{
+        const value = e.target.value;
+        if (e.keyCode == 13 && value) {
+            handleAddNew(explorer.id, value, showInput.isFolder);
+            setShowInput({
+                ...showInput,
+                visible: false
+            });
+        }
+    };
+    const handleNewFolder = (e, isFolder)=>{
+        e.stopPropagation();
+        setShowPopup(null);
+        setIsExpanded(true);
+        setShowInput({
+            ...showInput,
+            visible: true,
+            isFolder
+        });
+    };
+    const handleRename = (e)=>{
+        e.stopPropagation();
+        setShowPopup(null);
+        setIsNameUpdating(true);
+    };
+    const onNameChange = (e)=>{
+        const value = e.target.value;
+        if (e.keyCode == 13 && value) {
+            setIsNameUpdating(false);
+            onRename(explorer.id, value);
+        }
+    };
+    const handleDelete = ()=>{
+        setShowPopup(null);
+        onDelete(explorer.id);
+    };
+    const handleRightClick = (e)=>{
+        e.preventDefault();
+        if (ref) {
+            if (typeof ref === "function") ref(popupRef.current); // Handle callback refs
+            else ref.current = popupRef.current; // Handle MutableRefObject
+        }
+        setShowPopup(explorer.id);
+    };
+    if (explorer.isFolder) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        style: {
+            marginTop: 5
+        },
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _folderName.FolderName), {
+                ref: popupRef,
+                id: explorer.id,
+                setIsExpanded: setIsExpanded,
+                showPopup: showPopup,
+                name: explorer.name,
+                isFolder: explorer.isFolder,
+                handleDelete: handleDelete,
+                handleNewFolder: handleNewFolder,
+                handleRename: handleRename,
+                handleRightClick: handleRightClick,
+                isNameUpdating: isNameUpdating,
+                onNameChange: onNameChange
+            }, void 0, false, {
+                fileName: "src/projects/fileExplorer/Folder.tsx",
+                lineNumber: 89,
+                columnNumber: 9
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                style: {
+                    display: isExpanded ? "block" : "none",
+                    paddingLeft: 25
+                },
+                children: [
+                    showInput.visible && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "input-conatiner",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                children: [
+                                    showInput.isFolder ? "\uD83D\uDCC1" : "\uD83D\uDCC4",
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/projects/fileExplorer/Folder.tsx",
+                                lineNumber: 108,
+                                columnNumber: 15
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                autoFocus: true,
+                                onBlur: ()=>setShowInput({
+                                        ...showInput,
+                                        visible: false
+                                    }),
+                                onKeyDown: onAddNew
+                            }, void 0, false, {
+                                fileName: "src/projects/fileExplorer/Folder.tsx",
+                                lineNumber: 109,
+                                columnNumber: 15
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/projects/fileExplorer/Folder.tsx",
+                        lineNumber: 107,
+                        columnNumber: 13
+                    }, undefined),
+                    (0, _util.sortFoldersAndFiles)(explorer.children).map((exp)=>{
+                        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Folder, {
+                            ref: ref,
+                            showPopup: showPopup,
+                            explorer: exp,
+                            setShowPopup: setShowPopup,
+                            handleAddNew: handleAddNew,
+                            onDelete: onDelete,
+                            onRename: onRename
+                        }, exp.id, false, {
+                            fileName: "src/projects/fileExplorer/Folder.tsx",
+                            lineNumber: 118,
+                            columnNumber: 15
+                        }, undefined);
+                    })
+                ]
+            }, void 0, true, {
+                fileName: "src/projects/fileExplorer/Folder.tsx",
+                lineNumber: 103,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/projects/fileExplorer/Folder.tsx",
+        lineNumber: 88,
+        columnNumber: 7
+    }, undefined);
+    else return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _folderName.FolderName), {
+        ref: popupRef,
+        id: explorer.id,
+        showPopup: showPopup,
+        name: explorer.name,
+        isFolder: explorer.isFolder,
+        setIsExpanded: setIsExpanded,
+        handleDelete: handleDelete,
+        handleNewFolder: handleNewFolder,
+        handleRename: handleRename,
+        handleRightClick: handleRightClick,
+        isNameUpdating: isNameUpdating,
+        onNameChange: onNameChange
+    }, void 0, false, {
+        fileName: "src/projects/fileExplorer/Folder.tsx",
+        lineNumber: 135,
+        columnNumber: 7
+    }, undefined);
+}, "a3V4hJzvlUvXa67C52KIPCdEkXo="));
+_c = Folder;
+exports.default = Folder;
+var _c;
+$RefreshReg$(_c, "Folder");
+
+  $parcel$ReactRefreshHelpers$d42e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/FolderName":"3h2AI","./utils/util":"7RVJe"}],"km3Ru":[function(require,module,exports,__globalThis) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 var { version } = require("630b62916b1ae0e7");
@@ -34803,7 +35162,316 @@ function registerExportsForReactRefresh(module1) {
 },{"7422ead32dcc1e6b":"786KC","630b62916b1ae0e7":"4SQxb"}],"4SQxb":[function(require,module,exports,__globalThis) {
 module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
 
-},{}],"eJpmq":[function(require,module,exports,__globalThis) {
+},{}],"3h2AI":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$f53e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$f53e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FolderName", ()=>FolderName);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _buttonsPopup = require("./ButtonsPopup");
+const FolderName = /*#__PURE__*/ (0, _react.forwardRef)(_c = ({ isNameUpdating, showPopup, name, isFolder, id, handleRightClick, onNameChange, handleDelete, handleRename, handleNewFolder, setIsExpanded }, ref)=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: `${isFolder ? "folder" : "file"} ${showPopup === id ? "selected" : ""}`,
+        onContextMenu: handleRightClick,
+        onClick: isFolder ? ()=>setIsExpanded((prev)=>!prev) : undefined,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                className: "folder-name",
+                title: name,
+                children: [
+                    isFolder ? "\uD83D\uDCC2" : "\uD83D\uDCC4",
+                    " ",
+                    isNameUpdating ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        defaultValue: name,
+                        onKeyDown: onNameChange,
+                        autoFocus: true
+                    }, void 0, false, {
+                        fileName: "src/projects/fileExplorer/components/FolderName.tsx",
+                        lineNumber: 49,
+                        columnNumber: 13
+                    }, undefined) : name
+                ]
+            }, void 0, true, {
+                fileName: "src/projects/fileExplorer/components/FolderName.tsx",
+                lineNumber: 46,
+                columnNumber: 9
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonsPopup.ButtonsPopup), {
+                isFolder: isFolder,
+                show: showPopup === id,
+                ref: ref,
+                handleDelete: handleDelete,
+                handleRename: handleRename,
+                onAddNew: handleNewFolder
+            }, void 0, false, {
+                fileName: "src/projects/fileExplorer/components/FolderName.tsx",
+                lineNumber: 54,
+                columnNumber: 9
+            }, undefined),
+            " "
+        ]
+    }, void 0, true, {
+        fileName: "src/projects/fileExplorer/components/FolderName.tsx",
+        lineNumber: 39,
+        columnNumber: 7
+    }, undefined);
+});
+_c1 = FolderName;
+var _c, _c1;
+$RefreshReg$(_c, "FolderName$forwardRef");
+$RefreshReg$(_c1, "FolderName");
+
+  $parcel$ReactRefreshHelpers$f53e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./ButtonsPopup":"j1TfF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"j1TfF":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$2fb4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2fb4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ButtonsPopup", ()=>ButtonsPopup);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const ButtonsPopup = /*#__PURE__*/ (0, _react.forwardRef)(_c = ({ show, isFolder, onAddNew, handleRename, handleDelete }, ref)=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "btns-section",
+        ref: ref,
+        style: {
+            display: !show ? "none" : "flex"
+        },
+        children: [
+            isFolder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        onClick: (e)=>onAddNew(e, true),
+                        children: "New Folder"
+                    }, void 0, false, {
+                        fileName: "src/projects/fileExplorer/components/ButtonsPopup.tsx",
+                        lineNumber: 24,
+                        columnNumber: 15
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        onClick: (e)=>onAddNew(e, false),
+                        children: "New File"
+                    }, void 0, false, {
+                        fileName: "src/projects/fileExplorer/components/ButtonsPopup.tsx",
+                        lineNumber: 25,
+                        columnNumber: 15
+                    }, undefined)
+                ]
+            }, void 0, true),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: handleRename,
+                children: "Rename"
+            }, void 0, false, {
+                fileName: "src/projects/fileExplorer/components/ButtonsPopup.tsx",
+                lineNumber: 28,
+                columnNumber: 11
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: handleDelete,
+                children: "Delete"
+            }, void 0, false, {
+                fileName: "src/projects/fileExplorer/components/ButtonsPopup.tsx",
+                lineNumber: 29,
+                columnNumber: 11
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/projects/fileExplorer/components/ButtonsPopup.tsx",
+        lineNumber: 17,
+        columnNumber: 9
+    }, undefined);
+});
+_c1 = ButtonsPopup;
+var _c, _c1;
+$RefreshReg$(_c, "ButtonsPopup$forwardRef");
+$RefreshReg$(_c1, "ButtonsPopup");
+
+  $parcel$ReactRefreshHelpers$2fb4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7RVJe":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sortFoldersAndFiles", ()=>sortFoldersAndFiles);
+const sortFoldersAndFiles = (children)=>{
+    return children.sort((a, b)=>{
+        // Folders should come first
+        if (a.isFolder && !b.isFolder) return -1;
+        if (!a.isFolder && b.isFolder) return 1;
+        // If both are folders or both are files, sort alphabetically by name
+        return a.name.localeCompare(b.name);
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jQsCS":[function() {},{}],"fyS5D":[function(require,module,exports,__globalThis) {
+// import { FolderInterface } from "../../projects/fileExplorer/config";
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const useTraverseTree = ()=>{
+    const insertNode = (tree, folderId, name, isFolder)=>{
+        if (!folderId) return {
+            id: new Date().getTime(),
+            name,
+            isFolder,
+            children: []
+        };
+        // Base case: If the current node matches the target folderId
+        if (tree.id === folderId && tree.isFolder) return {
+            ...tree,
+            children: [
+                {
+                    id: new Date().getTime(),
+                    name,
+                    isFolder,
+                    children: []
+                },
+                ...tree.children
+            ]
+        };
+        // Recursive DFS traversal
+        for(let i = 0; i < tree.children.length; i++){
+            const updatedChild = insertNode(tree.children[i], folderId, name, isFolder);
+            if (updatedChild !== tree.children[i]) return {
+                ...tree,
+                children: [
+                    ...tree.children.slice(0, i),
+                    updatedChild,
+                    ...tree.children.slice(i + 1)
+                ]
+            };
+        }
+        return tree; // Return unchanged tree if folderId is not found
+    };
+    const renameNode = (tree, folderId, newName)=>{
+        // Base case: If the current node matches the target folderId
+        if (tree.id === folderId) return {
+            ...tree,
+            name: newName
+        };
+        // Recursive DFS traversal
+        for(let i = 0; i < tree.children.length; i++){
+            const updatedChild = renameNode(tree.children[i], folderId, newName);
+            if (updatedChild !== tree.children[i]) return {
+                ...tree,
+                children: [
+                    ...tree.children.slice(0, i),
+                    updatedChild,
+                    ...tree.children.slice(i + 1)
+                ]
+            };
+        }
+        return tree; // Return unchanged tree if folderId is not found
+    };
+    const deleteNode = (tree, folderId)=>{
+        // Base case: If the current node matches the target folderId
+        if (tree.id === folderId) return undefined; // Remove this node
+        // Recursive DFS traversal with filtering
+        const updatedChildren = [];
+        for(let i = 0; i < tree.children.length; i++){
+            const updatedChild = deleteNode(tree.children[i], folderId);
+            if (updatedChild) updatedChildren.push(updatedChild);
+        }
+        return {
+            ...tree,
+            children: updatedChildren
+        }; // Return updated tree
+    };
+    return {
+        insertNode,
+        renameNode,
+        deleteNode
+    };
+};
+exports.default = useTraverseTree; // const useTraverseTree = () => {
+ //   const insertNode = (
+ //     tree: FolderInterface,
+ //     folderId: number,
+ //     name: string,
+ //     isFolder: boolean
+ //   ) => {
+ //     if (tree.id === folderId && tree.isFolder) {
+ //       tree.children.unshift({
+ //         id: new Date().getTime(),
+ //         name,
+ //         isFolder,
+ //         children: [],
+ //       });
+ //       return tree;
+ //     }
+ //     // let latestNode =[]
+ //     let latestNode = tree.children.map((ob) => {
+ //       return insertNode(ob, folderId, name, isFolder);
+ //     });
+ //     return { ...tree, children: latestNode };
+ //   };
+ //   const renameNode =(tree: FolderInterface, folderId: number, newName:string) => {
+ //         if (tree.id === folderId) {
+ //             tree.name = newName
+ //             return tree
+ //         }
+ //         const latestNode = tree.children.map((ob) => renameNode(ob, folderId, newName))
+ //         return {...tree, children: latestNode}
+ //   }
+ //   const deleteNode =(tree: FolderInterface, folderId: number) => {
+ //     if (tree.id === folderId) {
+ //         return undefined
+ //     }
+ //     const latestNode = tree.children.map(ob => deleteNode(ob, folderId)).filter(Boolean)
+ //     return {...tree, children: latestNode}
+ //   }
+ //   return { insertNode, renameNode, deleteNode };
+ // };
+ // export default useTraverseTree;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dkMPB":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$ef31 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$ef31.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+const useOutsideClick = (ref, cb)=>{
+    const handleClick = (e)=>{
+        if (ref && !ref.contains(e.target)) cb();
+    };
+    (0, _react.useEffect)(()=>{
+        document.addEventListener("click", handleClick);
+        return ()=>{
+            document.removeEventListener("click", handleClick);
+        };
+    }, [
+        ref
+    ]);
+};
+exports.default = useOutsideClick;
+
+  $parcel$ReactRefreshHelpers$ef31.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"eJpmq":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$5c04 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
