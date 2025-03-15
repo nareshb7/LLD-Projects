@@ -3,6 +3,7 @@ export interface CheckboxModal {
   title: string;
   isChecked: boolean;
   parentId: number;
+  isExpanded: boolean;
   children: CheckboxModal[];
 }
 
@@ -11,53 +12,61 @@ export const nestedCheckboxData: CheckboxModal = {
   title: "Main - 1",
   isChecked: false,
   parentId: -1,
+  isExpanded: false,
   children: [
     {
       id: 2,
-      title: "Nested 1- 1",
+      title: "1- 1",
       isChecked: false,
       parentId: 1,
+      isExpanded: false,
       children: [
         {
           id: 4,
-          title: "Nested 1 - 1 - 1",
+          title: "1 - 1 - 1",
           isChecked: false,
           parentId: 2,
+          isExpanded: false,
           children: [
             {
               id: 6,
-              title: "Nested 1 - 1 - 1 - 1",
+              title: "1 - 1 - 1 - 1",
               isChecked: false,
               parentId: 4,
+              isExpanded: false,
               children: [],
             },
             {
               id: 7,
-              title: "Nested 1 - 1 - 1 - 2",
+              title: "1 - 1 - 1 - 2",
               isChecked: false,
               parentId: 4,
+              isExpanded: false,
               children: [],
             },
           ],
         },
         {
           id: 5,
-          title: "Nested 1 - 1 - 2",
+          title: "1 - 1 - 2",
           isChecked: false,
           parentId: 2,
+          isExpanded: false,
           children: [
             {
               id: 8,
-              title: "Nested 1 - 1 - 2 - 1",
+              title: "1 - 1 - 2 - 1",
               isChecked: false,
               parentId: 5,
+              isExpanded: false,
               children: [],
             },
             {
               id: 9,
-              title: "Nested 1 - 1 - 2 - 2",
+              title: "1 - 1 - 2 - 2",
               isChecked: false,
               parentId: 5,
+              isExpanded: false,
               children: [],
             },
           ],
@@ -66,50 +75,57 @@ export const nestedCheckboxData: CheckboxModal = {
     },
     {
       id: 3,
-      title: "Nested 1- 2",
+      title: "1- 2",
       isChecked: false,
       parentId: 1,
+      isExpanded: false,
       children: [
         {
           id: 10,
-          title: "Nested 1 - 2 - 1",
+          title: "1 - 2 - 1",
           isChecked: false,
           parentId: 3,
+          isExpanded: false,
           children: [
             {
               id: 12,
-              title: "Nested 1 - 2 - 1 - 1",
+              title: "1 - 2 - 1 - 1",
               isChecked: false,
               parentId: 10,
+              isExpanded: false,
               children: [],
             },
             {
               id: 13,
-              title: "Nested 1 - 2 - 1 - 2",
+              title: "1 - 2 - 1 - 2",
               isChecked: false,
               parentId: 10,
+              isExpanded: false,
               children: [],
             },
           ],
         },
         {
           id: 11,
-          title: "Nested 1 - 2 - 2",
+          title: "1 - 2 - 2",
           isChecked: false,
           parentId: 3,
+          isExpanded: false,
           children: [
             {
               id: 14,
-              title: "Nested 1 - 2 - 2 - 1",
+              title: "1 - 2 - 2 - 1",
               isChecked: false,
               parentId: 11,
+              isExpanded: false,
               children: [],
             },
             {
               id: 15,
-              title: "Nested 1 - 2 - 2 - 2",
+              title: "1 - 2 - 2 - 2",
               isChecked: false,
               parentId: 11,
+              isExpanded: false,
               children: [],
             },
           ],

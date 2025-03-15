@@ -5,9 +5,14 @@ import "./style.css";
 export interface RenderCheckboxProps {
   checkbox: CheckboxModal;
   onCheckboxClick: (isChecked: boolean, box: CheckboxModal) => void;
+  onExpandClick: (selected: CheckboxModal) => void;
 }
 
-const RenderCheckbox = ({ checkbox, onCheckboxClick }: RenderCheckboxProps) => {
+const RenderCheckbox = ({
+  checkbox,
+  onCheckboxClick,
+  onExpandClick,
+}: RenderCheckboxProps) => {
   return (
     <div className="checkbox-wrapper">
       <div className="checkbox-content">
@@ -19,15 +24,29 @@ const RenderCheckbox = ({ checkbox, onCheckboxClick }: RenderCheckboxProps) => {
           />
           <span className="checkbox-title">{checkbox.title}</span>
         </label>
-        {/* <div className="accordion-icon"> ^ </div> */}
+        {checkbox.children.length > 0 && (
+          <div
+            className="accordion-icon"
+            onClick={() => onExpandClick(checkbox)}
+          >
+            {" "}
+            {checkbox.isExpanded ? (
+              <span className="arrow-down">v</span>
+            ) : (
+              <span className="arrow-up">^</span>
+            )}{" "}
+          </div>
+        )}
       </div>
-      {checkbox.children.length > 0 && (
+      {checkbox.children.length > 0 && checkbox.isExpanded && (
         <div className="nested-children">
           {checkbox.children.map((children) => {
             return (
               <RenderCheckbox
+                key={children.id}
                 checkbox={children}
                 onCheckboxClick={onCheckboxClick}
+                onExpandClick={onExpandClick}
               />
             );
           })}
@@ -53,6 +72,7 @@ const NestedCheckbox = () => {
 
     const updateParents = (parent?: CheckboxModal) => {
       if (!parent) return;
+
       parent.isChecked = parent.children.every((child) => child.isChecked);
       updateParents(findParent(checkboxData, parent.parentId));
     };
@@ -81,6 +101,7 @@ const NestedCheckbox = () => {
     setCheckboxData((prevData) => {
       const newData = { ...updateTree(prevData) };
       updateParents(findParent(newData, selectedCheckbox.parentId));
+      newData.isChecked = newData.children.every((child) => child.isChecked);
       return newData;
     });
   };
@@ -126,12 +147,50 @@ const NestedCheckbox = () => {
   //     setCheckboxData(copyData);
   //   }
   // };
+
+  const handleExpandClick = (selectedBox) => {
+    const copiedData = { ...checkboxData };
+    const checkExpand = (
+      checkbox: CheckboxModal,
+      selectedBox: CheckboxModal
+    ) => {
+      if (checkbox.id === selectedBox.id) {
+        checkbox.isExpanded = !checkbox.isExpanded;
+      } else {
+        checkbox.children.forEach((child) => checkExpand(child, selectedBox));
+      }
+    };
+    checkExpand(copiedData, selectedBox);
+    setCheckboxData(copiedData);
+  };
+
+  const getSelectedCheckBoxes =() => {
+    let checked: CheckboxModal[] = [];
+
+    const check =(data: CheckboxModal) => {
+      if (data.isChecked && data.children.length == 0) {
+        checked.push(data)
+      }else if (data.children.length > 0) {
+        data.children.forEach(check)
+      }
+    }
+    check(checkboxData)
+    return checked
+  }
+
   return (
     <div className="nested-checkbox-wrapper">
       <RenderCheckbox
         checkbox={checkboxData}
         onCheckboxClick={handleCheckboxClick}
+        onExpandClick={handleExpandClick}
       />
+      <div>
+        <h3 style={{color: "#aaa"}}>Selected Checkboxes :</h3>
+        {
+          getSelectedCheckBoxes().map(cb => <div key={cb.id}>Box: {cb.title}</div>)
+        }
+      </div>
     </div>
   );
 };
