@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { ButtonsPopup } from "./ButtonsPopup";
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
 export interface FolderNameProps {
   isNameUpdating: boolean;
@@ -55,7 +56,7 @@ export const FolderName = forwardRef<HTMLDivElement, FolderNameProps>(
             name
           )}
         </span>
-        {hasChild && <div>{isExpanded ? "v" : "^"}</div>}
+        {hasChild && <div>{isExpanded ?  <BiChevronDown /> : <BiChevronUp />}</div>}
         <ButtonsPopup
           isFolder={isFolder}
           show={showPopup === id}

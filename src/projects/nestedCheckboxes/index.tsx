@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CheckboxModal, nestedCheckboxData } from "./mockData";
 import "./style.css";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
 export interface RenderCheckboxProps {
   checkbox: CheckboxModal;
@@ -31,9 +33,13 @@ const RenderCheckbox = ({
           >
             {" "}
             {checkbox.isExpanded ? (
-              <span className="arrow-down">v</span>
+              <span className="arrow-down">
+                <BiChevronDown />
+              </span>
             ) : (
-              <span className="arrow-up">^</span>
+              <span className="arrow-up">
+                <BiChevronUp />
+              </span>
             )}{" "}
           </div>
         )}
@@ -164,19 +170,19 @@ const NestedCheckbox = () => {
     setCheckboxData(copiedData);
   };
 
-  const getSelectedCheckBoxes =() => {
+  const getSelectedCheckBoxes = () => {
     let checked: CheckboxModal[] = [];
 
-    const check =(data: CheckboxModal) => {
+    const check = (data: CheckboxModal) => {
       if (data.isChecked && data.children.length == 0) {
-        checked.push(data)
-      }else if (data.children.length > 0) {
-        data.children.forEach(check)
+        checked.push(data);
+      } else if (data.children.length > 0) {
+        data.children.forEach(check);
       }
-    }
-    check(checkboxData)
-    return checked
-  }
+    };
+    check(checkboxData);
+    return checked;
+  };
 
   return (
     <div className="nested-checkbox-wrapper">
@@ -186,10 +192,10 @@ const NestedCheckbox = () => {
         onExpandClick={handleExpandClick}
       />
       <div>
-        <h3 style={{color: "#aaa"}}>Selected Checkboxes :</h3>
-        {
-          getSelectedCheckBoxes().map(cb => <div key={cb.id}>Box: {cb.title}</div>)
-        }
+        <h3 style={{ color: "#aaa" }}>Selected Checkboxes :</h3>
+        {getSelectedCheckBoxes().map((cb) => (
+          <div key={cb.id}>Box: {cb.title}</div>
+        ))}
       </div>
     </div>
   );
