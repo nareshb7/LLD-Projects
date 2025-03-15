@@ -16,14 +16,3 @@
   margin-right: 10px;
   cursor: pointer;
 }
-.nested-checkbox-wrapper .arrow-up {
-  color: #888;
-}
-
-.nested-checkbox-wrapper .arrow-down {
-  color: blueviolet;
-}
-
-.nested-checkbox-wrapper .arrow-up:hover , .nested-checkbox-wrapper .arrow-down:hover {
-  color: #000 !important;
-}
