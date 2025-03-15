@@ -1,0 +1,13 @@
+.nested-checkbox-wrapper .nested-children {
+  padding-left: 20px;
+  border-left: 1px solid #888;
+  margin-block: 5px;
+}
+
+.nested-checkbox-wrapper .checkbox-wrapper .checkbox-title {
+  padding-left: 5px;
+}
+
+.nested-checkbox-wrapper .checkbox-content {
+    display: flex;
+}

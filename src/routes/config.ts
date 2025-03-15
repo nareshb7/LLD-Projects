@@ -1,4 +1,5 @@
 import FileExplorer from "../projects/fileExplorer";
+import NestedCheckbox from "../projects/nestedCheckboxes";
 import ToastNotification from "../projects/toastNotification";
 
 export interface Project {
@@ -20,5 +21,11 @@ export const projectsConfig: Project[] = [
     name: "File Explorer",
     path:'file-explorer',
     Component: FileExplorer
+  },
+  {
+    id: 3,
+    name: "Nested Checkboxes",
+    path:'nested-checkboxes',
+    Component: NestedCheckbox
   }
 ];
