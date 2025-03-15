@@ -16,6 +16,8 @@ export interface FolderNameProps {
     isFolder: boolean
   ) => void;
   setIsExpanded: (value: React.SetStateAction<boolean>) => void;
+  isExpanded: boolean;
+  hasChild: boolean;
 }
 
 export const FolderName = forwardRef<HTMLDivElement, FolderNameProps>(
@@ -26,6 +28,8 @@ export const FolderName = forwardRef<HTMLDivElement, FolderNameProps>(
       name,
       isFolder,
       id,
+      isExpanded,
+      hasChild,
       handleRightClick,
       onNameChange,
       handleDelete,
@@ -51,6 +55,7 @@ export const FolderName = forwardRef<HTMLDivElement, FolderNameProps>(
             name
           )}
         </span>
+        {hasChild && <div>{isExpanded ? "v" : "^"}</div>}
         <ButtonsPopup
           isFolder={isFolder}
           show={showPopup === id}

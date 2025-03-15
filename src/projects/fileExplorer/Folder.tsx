@@ -99,7 +99,10 @@ const Folder = forwardRef<HTMLDivElement, FolderProps>(({
           handleRightClick={handleRightClick}
           isNameUpdating={isNameUpdating}
           onNameChange={onNameChange}
+          isExpanded={isExpanded}
+          hasChild={explorer.children.length > 0}
         />
+        
         <div
           style={{ display: isExpanded ? "block" : "none", paddingLeft: 25 }}
         >
@@ -145,6 +148,8 @@ const Folder = forwardRef<HTMLDivElement, FolderProps>(({
         handleRightClick={handleRightClick}
         isNameUpdating={isNameUpdating}
         onNameChange={onNameChange}
+        isExpanded={isExpanded}
+        hasChild={explorer.children.length > 0}
       />
     );
   }
