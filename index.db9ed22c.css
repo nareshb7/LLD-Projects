@@ -58,6 +58,11 @@
   overflow: hidden;
 }
 
+.nested-checkbox-wrapper {
+  width: 500px;
+  overflow: auto;
+}
+
 .nested-checkbox-wrapper .nested-children {
   border-left: 1px solid #888;
   margin-block: 5px;
