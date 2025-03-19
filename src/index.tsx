@@ -10,7 +10,12 @@ if (rootEl) {
   const root = createRoot(rootEl);
   root.render(
     <Suspense fallback={<div>Loading..</div>}>
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
     </Suspense>
   );
 }
