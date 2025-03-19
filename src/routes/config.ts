@@ -30,7 +30,7 @@ export const projectsConfig: Project[] = [
     Component: NestedCheckbox
   },
   {
-    id: 3,
+    id: 4,
     name: "Progress Bar",
     path:'progress-bar',
     Component: ProgressBar
