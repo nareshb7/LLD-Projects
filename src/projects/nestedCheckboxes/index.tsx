@@ -18,14 +18,19 @@ const RenderCheckbox = ({
   return (
     <div className="checkbox-wrapper">
       <div className="checkbox-content">
-        <label>
+        <div>
           <input
             type="checkbox"
             checked={checkbox.isChecked}
             onChange={(e) => onCheckboxClick(e.target.checked, checkbox)}
           />
-          <span className="checkbox-title">{checkbox.title}</span>
-        </label>
+          <span
+            className="checkbox-title"
+            onClick={() => onExpandClick(checkbox)}
+          >
+            {checkbox.title}
+          </span>
+        </div>
         {checkbox.children.length > 0 && (
           <div
             className="accordion-icon"

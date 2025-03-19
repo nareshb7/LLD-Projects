@@ -11,6 +11,7 @@
 
 .nested-checkbox-wrapper .checkbox-wrapper .checkbox-title {
   padding-left: 5px;
+  cursor: pointer;
 }
 
 .nested-checkbox-wrapper .checkbox-content {
