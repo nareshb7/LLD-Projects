@@ -70,6 +70,7 @@
 }
 
 .nested-checkbox-wrapper .checkbox-wrapper .checkbox-title {
+  cursor: pointer;
   padding-left: 5px;
 }
 
@@ -81,6 +82,19 @@
 .nested-checkbox-wrapper .accordion-icon {
   cursor: pointer;
   margin-right: 10px;
+}
+
+.progress-bar .outer-box {
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.progress-bar .inner-box {
+  text-align: right;
+  background-color: #0f0;
+  transition: all .5s ease-in;
 }
 
 .notification {
