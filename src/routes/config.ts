@@ -1,6 +1,7 @@
 import FileExplorer from "../projects/fileExplorer";
 import NestedCheckbox from "../projects/nestedCheckboxes";
 import ProgressBar from "../projects/progressBar";
+import SearchBar from "../projects/searchBar";
 import ToastNotification from "../projects/toastNotification";
 
 export interface Project {
@@ -34,5 +35,11 @@ export const projectsConfig: Project[] = [
     name: "Progress Bar",
     path:'progress-bar',
     Component: ProgressBar
+  },
+  {
+    id: 5,
+    name: "Search Bar",
+    path:'search-bar',
+    Component: SearchBar
   }
 ];
