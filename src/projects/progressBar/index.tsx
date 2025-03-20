@@ -9,9 +9,21 @@ const Bar = ({ progress }: BarProps) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => {
-      setValue(progress);
-    }, 100);
+    let interval;
+    setValue(progress);
+    interval = setInterval(() => {
+      setValue((prev) => {
+        if (prev + 10 > 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 8;
+      });
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
   return (
     <div className="outer-box">
