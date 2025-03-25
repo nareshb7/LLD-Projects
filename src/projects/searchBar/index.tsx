@@ -37,7 +37,7 @@ const SearchBar = () => {
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setInput(value);
-    if (value.length > 2) {
+    if (value.length > 0) {
       setShowDropDown(true);
     } else {
       setShowDropDown(false);

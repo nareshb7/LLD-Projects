@@ -1,5 +1,6 @@
 import FileExplorer from "../projects/fileExplorer";
 import NestedCheckbox from "../projects/nestedCheckboxes";
+import VehicleParking from "../projects/parkingLot";
 import ProgressBar from "../projects/progressBar";
 import SearchBar from "../projects/searchBar";
 import ToastNotification from "../projects/toastNotification";
@@ -41,5 +42,10 @@ export const projectsConfig: Project[] = [
     name: "Search Bar",
     path:'search-bar',
     Component: SearchBar
+  },{
+    id: 6,
+    name: "Parking Lot",
+    path:'parking-lot',
+    Component: VehicleParking
   }
 ];

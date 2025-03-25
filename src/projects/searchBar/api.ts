@@ -29,7 +29,7 @@ export const getApiData = (searchVal: string): Promise<GetApiResponse> => {
         } else {
           reject({ success: false, message: "No records found" });
         }
-      }, 2000);
+      }, 1500);
     } else {
       reject({ success: false, message: "No Input value" });
     }
