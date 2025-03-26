@@ -65,7 +65,6 @@ const useToastNotification = (position: NotificationPosition) => {
       ))
     : null;
 
-  console.log("notify::", notficationsList);
 
   return {
     NotificationComponent,

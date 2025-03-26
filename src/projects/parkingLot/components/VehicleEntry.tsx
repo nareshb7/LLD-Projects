@@ -38,7 +38,6 @@ const VehicleEntry = () => {
     setVehicle(initalVehicleObj);
   };
 
-  console.log("vehicle:::", vehicle)
   return (
     <div>
       <h3 className="heading">Vehicle Entry : </h3>
