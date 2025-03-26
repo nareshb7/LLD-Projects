@@ -1,0 +1,50 @@
+.parking-lot-wrapper .parking-spot {
+  border: 1px solid #000;
+  margin: 5px;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 5px;
+  font-weight: 600;
+  font-family: serif;
+}
+.parking-lot-wrapper .heading {
+    color: #666;
+}
+
+.parking-lot-wrapper .parking-spot.active-spot {
+    border: 1px solid rgb(25, 182, 25);
+}
+.parking-lot-wrapper .parking-lot {
+  display: flex;
+  flex-wrap: wrap;
+}
+.parking-lot-wrapper .vehicle-input {
+  padding: 10px;
+  border-radius: 8px;
+  width: 250px;
+  margin: 5px;
+}
+.parking-lot-wrapper .vehicle-entry-btn {
+  padding: 5px 10px;
+  margin: 5px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.parking-lot-wrapper .vehicle-icon {
+    font-size: 24px;
+}
+.parking-lot-wrapper .vehicle-details {
+    color: #0f3285;
+}
+.parking-lot-wrapper .exit-button {
+    padding: 5px 10px;
+    /* border: 1px solid #000; */
+    border-radius: 5px;
+    background: #c56a27;
+    border: none;
+}
+.parking-lot-wrapper .exit-button:hover {
+    color: #fff;
+    background-color: #888;
+}
