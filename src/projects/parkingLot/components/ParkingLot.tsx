@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCar, FaTruck } from "react-icons/fa";
 import { RiEBikeFill } from "react-icons/ri";
-import { useParkingContext, VehicleType } from "../context";
+import { Ticket, useParkingContext, VehicleType } from "../context";
 
 const vehicleIcons = {
   [VehicleType.BIKE]: <RiEBikeFill />,
@@ -12,20 +12,38 @@ const getVehicle = (type: VehicleType | null) => {
   return type ? vehicleIcons[type] : null;
 };
 
+export const getPayment = (ticket: Ticket) => {
+  const currentTime = new Date().getTime();
+  const entryTime = new Date(ticket.entryTime || "").getTime();
+  const duration = (currentTime - entryTime) / (1000 * 60 * 60);
+
+  return (duration * hourlyAmount).toFixed(2);
+};
+
+export const hourlyAmount = 50;
+
 const ParkingLot = () => {
-  const { parkingSpots, setParkingSpots } = useParkingContext();
+  const { parkingSpots, setParkingSpots, setTickets, tickets } =
+    useParkingContext();
 
   const handleExit = (spotId: string) => {
     const parkingSpot = parkingSpots.find((spot) => spot.id == spotId);
+    const ticket = tickets.find((ticket) => ticket.spot == spotId);
 
-    if (parkingSpot) {
-      parkingSpot.isOccupied = false;
-      parkingSpot.vehicle = null;
-      setParkingSpots(
-        parkingSpots.map((spot) =>
-          spot.id === parkingSpot.id ? parkingSpot : spot
-        )
-      );
+    console.log("tickdt::::", parkingSpot, ticket);
+
+    if (parkingSpot && ticket) {
+      let cnfrm = window.confirm(`Your payment is Rs: ${getPayment(ticket)}/-`);
+      if (cnfrm) {
+        setTickets((prev) => prev.filter((tkt) => tkt.spot !== spotId));
+        parkingSpot.isOccupied = false;
+        parkingSpot.vehicle = null;
+        setParkingSpots(
+          parkingSpots.map((spot) =>
+            spot.id === parkingSpot.id ? parkingSpot : spot
+          )
+        );
+      }
     }
   };
   return (
@@ -38,7 +56,7 @@ const ParkingLot = () => {
             key={spot.id}
           >
             <div>
-              Spot: Level{spot.level}-{spot.id}
+              Spot: L{spot.level}-{spot.id}
             </div>
             {spot.isOccupied ? (
               <div className="vehicle-details">

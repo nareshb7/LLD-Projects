@@ -1,15 +1,24 @@
 import React from "react";
-import ParkingProvider from "./context";
-import ParkingLot from "./components/ParkingLot";
-import "./style.css"
-import VehicleEntry from "./components/VehicleEntry";
+import Tabs from "./components/Tabs";
+import { TabsCompoent } from "./components/config";
+import ParkingProvider, { useParkingContext } from "./context";
+import "./style.css";
+
+const SelectedComponent = () => {
+  const { activeTab } = useParkingContext();
+  const Component = TabsCompoent[activeTab]
+
+  return <Component />
+};
 
 const VehicleParking = () => {
   return (
     <ParkingProvider>
-      <div className="parking-lot-wrapper">
-        <VehicleEntry />
-        <ParkingLot />
+      <div className="parking-lot-wrapper ">
+        <Tabs />
+        <div className="m-2">
+          <SelectedComponent />
+        </div>
       </div>
     </ParkingProvider>
   );

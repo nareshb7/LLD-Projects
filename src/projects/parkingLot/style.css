@@ -1,3 +1,13 @@
+.parking-lot-wrapper .top-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.parking-lot-wrapper .container {
+  margin: 10px
+}
+
 .parking-lot-wrapper .parking-spot {
   border: 1px solid #000;
   margin: 5px;
@@ -6,13 +16,16 @@
   border-radius: 5px;
   font-weight: 600;
   font-family: serif;
+  width: 150px;
+  height: 110px;
+  text-align: center;
 }
 .parking-lot-wrapper .heading {
-    color: #666;
+  color: #666;
 }
 
 .parking-lot-wrapper .parking-spot.active-spot {
-    border: 1px solid rgb(25, 182, 25);
+  border: 1px solid rgb(25, 182, 25);
 }
 .parking-lot-wrapper .parking-lot {
   display: flex;
@@ -32,19 +45,27 @@
 }
 
 .parking-lot-wrapper .vehicle-icon {
-    font-size: 24px;
+  font-size: 24px;
 }
 .parking-lot-wrapper .vehicle-details {
-    color: #0f3285;
+  color: #0f3285;
 }
 .parking-lot-wrapper .exit-button {
-    padding: 5px 10px;
-    /* border: 1px solid #000; */
-    border-radius: 5px;
-    background: #c56a27;
-    border: none;
+  padding: 5px 10px;
+  /* border: 1px solid #000; */
+  border-radius: 5px;
+  background: #c56a27;
+  border: none;
 }
 .parking-lot-wrapper .exit-button:hover {
-    color: #fff;
-    background-color: #888;
+  color: #fff;
+  background-color: #888;
+}
+.parking-lot-wrapper .parking-tickets {
+  margin: 10px;
+}
+
+.parking-lot-wrapper .ticket-list {
+  font-family: math;
+  font-weight: 700;
 }
