@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Ticket, useParkingContext, Vehicle } from "../context";
-import { hourlyAmount } from "./ParkingLot";
-import { TabTypes } from "./config";
+import { useParkingContext } from "../context";
+import { hourlyAmount, TabTypes } from "./config";
+import { findEmptySlot, parkVehicleIntoSlot } from "./utils";
+import { Ticket, Vehicle, VehicleType } from "../context/types";
+import { getVehicle } from "./ParkingLot";
+import { BiBarcode } from "react-icons/bi";
+import { FaBarcode } from "react-icons/fa6";
+import { ParkingEntryTicket } from "./ParkingTicket";
 
 const initalVehicleObj = {
   plateNumber: "",
@@ -16,14 +21,21 @@ const generateTicketId = () => {
   const day = date.getDate();
   const prevId = localStorage.getItem("prevTicketID");
   const ticketId = prevId ? JSON.parse(prevId) : initialTicketId;
-  localStorage.setItem("prevTicketID", JSON.stringify(ticketId+1));
+  localStorage.setItem("prevTicketID", JSON.stringify(ticketId + 1));
   return `${year}${month <= 9 ? "0" + month : month}${
     day <= 9 ? "0" + day : day
   }${ticketId}`;
 };
 
 const VehicleEntry = () => {
-  const { parkingSpots,tickets, setParkingSpots, setTickets,setActiveTab, showNotification } = useParkingContext();
+  const {
+    parkingSpots,
+    tickets,
+    setParkingSpots,
+    setTickets,
+    setActiveTab,
+    showNotification,
+  } = useParkingContext();
   const [vehicle, setVehicle] = useState<Vehicle>(initalVehicleObj);
 
   const handleChange = (
@@ -45,82 +57,93 @@ const VehicleEntry = () => {
   const handleVehicleEnter = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { type, plateNumber } = vehicle;
-    if (!type || !plateNumber.trim() || plateNumber.trim().length < 9 ) {
-      showNotification("Check vehicle details..!", "warning")
-      return
-    };
-    const availableSpot = parkingSpots.find((spot) => !spot.isOccupied);
-    const isExistedVehicle = tickets.find(ticket => ticket.vehicle?.plateNumber.toLowerCase() === plateNumber.toLowerCase());
+    if (!type || !plateNumber.trim() || plateNumber.trim().length < 9) {
+      showNotification("Check entered vehicle details..!", "warning");
+      return;
+    }
+    const availableSpot = findEmptySlot(parkingSpots, type);
+    const isExistedVehicle = tickets.find(
+      (ticket) =>
+        ticket.vehicle?.plateNumber.toLowerCase() === plateNumber.toLowerCase()
+    );
     if (isExistedVehicle) {
-      setVehicle(initalVehicleObj);
-      showNotification("Vehicle is already in parking, Please verify vehicle number again.", "warning");
-      return
+      showNotification(
+        "Vehicle is already in parking, Please verify vehicle number again.",
+        "warning"
+      );
+      return;
     }
     if (!availableSpot) {
       setVehicle(initalVehicleObj);
-      showNotification("Parking is Full.", "warning");
+      showNotification(`Parking is Full for ${type}'s`, "warning");
       return;
     }
     const updatedVehicle = {
       ...vehicle,
-      plateNumber: plateNumber.toUpperCase(),
+      plateNumber: plateNumber.trim().toUpperCase(),
     };
-    availableSpot.isOccupied = true;
-    availableSpot.vehicle = updatedVehicle;
     const ticket = generateTicket(updatedVehicle, availableSpot.id);
-    
-    setTickets((prev) => [...prev, ticket]);
-    setParkingSpots(
-      parkingSpots.map((spot) =>
-        spot.id === availableSpot.id ? availableSpot : spot
-      )
+
+    const isVehicleParked = parkVehicleIntoSlot(
+      availableSpot.id,
+      updatedVehicle,
+      parkingSpots
     );
-    setVehicle(initalVehicleObj);
-    showNotification(`Slot is assigned: ${ticket.spot}\nTicket ID: ${ticket.id}`, "success");
-    setActiveTab(TabTypes.PARKING_LOT)
+    if (isVehicleParked) {
+      setParkingSpots([...parkingSpots]);
+      setVehicle(initalVehicleObj);
+      showNotification(
+        `Slot is assigned: ${ticket.spot}\nTicket ID: ${ticket.id}`,
+        "success"
+      );
+      setTickets((prev) => [...prev, ticket]);
+      // setActiveTab(TabTypes.PARKING_LOT);
+    }
   };
 
   return (
-    <div>
-      <h3 className="heading">Vehicle Entry : </h3>
-      <h5>Per hour : Rs.{hourlyAmount}/-</h5>
+    <div className="d-flex">
       <div>
-        <form onSubmit={handleVehicleEnter}>
-          <div>
-            <label>
-              <input
-                className="vehicle-input form-control"
-                placeholder="Enter Vehicle Number..."
-                value={vehicle.plateNumber}
-                name="plateNumber"
-                onChange={handleChange}
-                required
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              <select
-                className="vehicle-input form-control"
-                value={vehicle.type || ""}
-                name="type"
-                onChange={handleChange}
-                required
-              >
-                <option>Select Vehicle Type</option>
-                <option value="Bike">Bike</option>
-                <option value="Car">Car</option>
-                <option value="Truck">Truck</option>
-              </select>
-            </label>
-          </div>
-          <div>
-            <button type="submit" className="btn btn-primary">
-              Enter
-            </button>
-          </div>
-        </form>
+        <h3 className="heading">Vehicle Entry : </h3>
+        <div className="d-flex">
+          <form onSubmit={handleVehicleEnter}>
+            <div>
+              <label>
+                <input
+                  className="vehicle-input form-control"
+                  placeholder="Enter Vehicle Number..."
+                  value={vehicle.plateNumber}
+                  name="plateNumber"
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                <select
+                  className="vehicle-input form-control"
+                  value={vehicle.type || ""}
+                  name="type"
+                  onChange={handleChange}
+                  required
+                >
+                  <option>Select Vehicle Type</option>
+                  <option value="Bike">Bike</option>
+                  <option value="Car">Car</option>
+                  <option value="Truck">Truck</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <button type="submit" className="btn btn-primary">
+                Enter
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
+      {tickets[0] && <ParkingEntryTicket ticket={tickets[0]} />}
     </div>
   );
 };

@@ -3,55 +3,20 @@ import { ParkingProviderProps } from "../types";
 import useToastNotification, {
   NotificationSeverity,
 } from "../../../hooks/useToastNotification";
-
-export enum VehicleType {
-  CAR = "Car",
-  BIKE = "Bike",
-  TRUCK = "Truck",
-}
-
-export interface Vehicle {
-  plateNumber: string;
-  type: VehicleType | null;
-}
-
-export interface ParkingSpot {
-  vehicle: Vehicle | null;
-  id: string;
-  level: number;
-  isOccupied: boolean;
-}
-
-export interface Ticket {
-  vehicle: Vehicle | null;
-  id: string;
-  entryTime: string | null;
-  spot: string;
-}
-
-export interface ParkingContextInterface {
-  parkingSpots: ParkingSpot[];
-  setParkingSpots: React.Dispatch<React.SetStateAction<ParkingSpot[]>>;
-  tickets: Ticket[];
-  setTickets: React.Dispatch<React.SetStateAction<Ticket[]>>;
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-  showNotification: (message: string, severity?: NotificationSeverity) => void;
-}
+import { ParkingContextInterface, ParkingSpot, Ticket } from "./types";
+import { getInitialSlots } from "./utils";
 
 const ParkingContext = createContext<ParkingContextInterface | null>(null);
-export let ticketId = 0;
-
-const initialSpots: ParkingSpot[] = new Array(10)
-  .fill(0)
-  .map((_, i) => ({ vehicle: null, isOccupied: false, id: `A${i}`, level: 1 }));
 
 const ParkingProvider = ({ children }: ParkingProviderProps) => {
   const { triggerNotification, NotificationComponent } =
     useToastNotification("top-right");
-  const [parkingSpots, setParkingSpots] = useState<ParkingSpot[]>(initialSpots);
+  const [parkingSpots, setParkingSpots] = useState<ParkingSpot[][]>(getInitialSlots(5));
+  const [collectedAmount,setCollectedAmount] = useState<number>(0)
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [activeTab, setActiveTab] = useState("VEHICLE_ENTRY_FORM");
+  const [removingVehicleTicket, setRemovingVehicleTicket] =
+      useState<Ticket | null>(null);
 
   const showNotification = (
     message: string,
@@ -85,10 +50,14 @@ const ParkingProvider = ({ children }: ParkingProviderProps) => {
         parkingSpots,
         tickets,
         activeTab,
+        collectedAmount,
+        removingVehicleTicket,
         setActiveTab,
         setParkingSpots,
         setTickets,
         showNotification,
+        setCollectedAmount,
+        setRemovingVehicleTicket
       }}
     >
       {NotificationComponent}

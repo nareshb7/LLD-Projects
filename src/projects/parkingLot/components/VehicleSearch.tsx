@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Ticket, useParkingContext } from "../context";
-import { getPayment } from "./ParkingLot";
+import { useParkingContext } from "../context";
+import { Ticket } from "../context/types";
+import { getPayment } from "./utils";
+import TicketDetails from "./TicketDetails";
 
 const VehicleSearch = () => {
   const { tickets, showNotification } = useParkingContext();
@@ -17,6 +19,7 @@ const VehicleSearch = () => {
     if (ticket) {
         setSelectedTicket(ticket);
     } else {
+      setSelectedTicket({} as Ticket)
       showNotification("Data not found", "warning")
     }
 
@@ -32,12 +35,8 @@ const VehicleSearch = () => {
         />
         <button onClick={handleSearch} className="btn btn-secondary mt-2">Search</button>
       </div>
-      {selectedTicket.id && <div>
-            <h3>Vehicle No: {selectedTicket.vehicle?.plateNumber}</h3>
-            <h3>Vehicle Type: {selectedTicket.vehicle?.type}</h3>
-            <h3>Parking Slot: {selectedTicket.spot}</h3>
-            <h3>Entry Time: {selectedTicket.entryTime}</h3>
-            <h3>Parking Amount: Rs: {getPayment(selectedTicket)}/-</h3>
+      {selectedTicket.id && <div >
+            <TicketDetails ticket={selectedTicket} />
         </div>}
     </div>
   );

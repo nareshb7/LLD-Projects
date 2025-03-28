@@ -3,6 +3,7 @@ import Tabs from "./components/Tabs";
 import { TabsCompoent } from "./components/config";
 import ParkingProvider, { useParkingContext } from "./context";
 import "./style.css";
+import Modal from "./components/Modal";
 
 const SelectedComponent = () => {
   const { activeTab } = useParkingContext();
@@ -16,6 +17,7 @@ const VehicleParking = () => {
     <ParkingProvider>
       <div className="parking-lot-wrapper ">
         <Tabs />
+        
         <div className="m-2">
           <SelectedComponent />
         </div>

@@ -20,6 +20,14 @@
   height: 110px;
   text-align: center;
 }
+.parking-lot-wrapper .parking-spot.Bike {
+  width: 110px;
+  height: 130px;
+}
+.parking-lot-wrapper .parking-spot.Truck {
+  width: 150px;
+  height: 130px;
+}
 .parking-lot-wrapper .heading {
   color: #666;
 }
@@ -68,4 +76,32 @@
 .parking-lot-wrapper .ticket-list {
   font-family: math;
   font-weight: 700;
+}
+
+.parking-lot-wrapper td, .parking-lot-wrapper th {
+  border: 1px solid #000;
+}
+
+
+.custom-overlay {
+  position: absolute;
+    /* width: 100vw; */
+    /* height: 100vh; */
+    z-index: 1;
+    opacity: 1;
+    background: rgb(102 102 102 / 50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.parking-lot-wrapper .generated-ticket {
+  font-family: monospace;
+  width: 350px;
+}
+.parking-lot-wrapper .generated-ticket .park-date {
+  width: 90px;
+}
+.parking-lot-wrapper .border-dotted {
+  border: 1px dashed #888 !important;
 }
