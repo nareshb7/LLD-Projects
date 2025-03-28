@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Ticket, useParkingContext, Vehicle } from "../context";
 import { hourlyAmount } from "./ParkingLot";
+import { TabTypes } from "./config";
 
 const initalVehicleObj = {
   plateNumber: "",
@@ -22,7 +23,7 @@ const generateTicketId = () => {
 };
 
 const VehicleEntry = () => {
-  const { parkingSpots, setParkingSpots, setTickets } = useParkingContext();
+  const { parkingSpots,tickets, setParkingSpots, setTickets,setActiveTab, showNotification } = useParkingContext();
   const [vehicle, setVehicle] = useState<Vehicle>(initalVehicleObj);
 
   const handleChange = (
@@ -44,10 +45,20 @@ const VehicleEntry = () => {
   const handleVehicleEnter = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { type, plateNumber } = vehicle;
-    if (!type || !plateNumber) return;
+    if (!type || !plateNumber.trim() || plateNumber.trim().length < 9 ) {
+      showNotification("Check vehicle details..!", "warning")
+      return
+    };
     const availableSpot = parkingSpots.find((spot) => !spot.isOccupied);
+    const isExistedVehicle = tickets.find(ticket => ticket.vehicle?.plateNumber.toLowerCase() === plateNumber.toLowerCase());
+    if (isExistedVehicle) {
+      setVehicle(initalVehicleObj);
+      showNotification("Vehicle is already in parking, Please verify vehicle number again.", "warning");
+      return
+    }
     if (!availableSpot) {
-      alert("Parking is Full..!");
+      setVehicle(initalVehicleObj);
+      showNotification("Parking is Full.", "warning");
       return;
     }
     const updatedVehicle = {
@@ -57,6 +68,7 @@ const VehicleEntry = () => {
     availableSpot.isOccupied = true;
     availableSpot.vehicle = updatedVehicle;
     const ticket = generateTicket(updatedVehicle, availableSpot.id);
+    
     setTickets((prev) => [...prev, ticket]);
     setParkingSpots(
       parkingSpots.map((spot) =>
@@ -64,6 +76,8 @@ const VehicleEntry = () => {
       )
     );
     setVehicle(initalVehicleObj);
+    showNotification(`Slot is assigned: ${ticket.spot}\nTicket ID: ${ticket.id}`, "success");
+    setActiveTab(TabTypes.PARKING_LOT)
   };
 
   return (

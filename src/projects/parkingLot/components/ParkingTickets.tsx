@@ -7,7 +7,7 @@ const ParkingTickets = () => {
   console.log("tickets::::", tickets);
   return (
     <div className="parking-tickets">
-      <h3 className="heading">Parking Tickets</h3>
+      <h3 className="heading">Active Tickets</h3>
 
       {tickets.length > 0 ? (
         <div>

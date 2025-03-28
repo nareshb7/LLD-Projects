@@ -3,7 +3,7 @@ import { Ticket, useParkingContext } from "../context";
 import { getPayment } from "./ParkingLot";
 
 const VehicleSearch = () => {
-  const { tickets } = useParkingContext();
+  const { tickets, showNotification } = useParkingContext();
   const [vehicleNo, setVehicleNo] = useState("");
   const [selectedTicket, setSelectedTicket] = useState<Ticket>({} as Ticket);
 
@@ -17,7 +17,7 @@ const VehicleSearch = () => {
     if (ticket) {
         setSelectedTicket(ticket);
     } else {
-        alert("No data found..!")
+      showNotification("Data not found", "warning")
     }
 
   };
@@ -28,8 +28,9 @@ const VehicleSearch = () => {
           value={vehicleNo}
           className="form-control"
           onChange={handleChange}
+          placeholder="Enter vehicle number...!"
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch} className="btn btn-secondary mt-2">Search</button>
       </div>
       {selectedTicket.id && <div>
             <h3>Vehicle No: {selectedTicket.vehicle?.plateNumber}</h3>

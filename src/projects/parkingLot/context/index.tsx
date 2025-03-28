@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ParkingProviderProps } from "../types";
+import useToastNotification, {
+  NotificationSeverity,
+} from "../../../hooks/useToastNotification";
 
 export enum VehicleType {
   CAR = "Car",
@@ -33,19 +36,33 @@ export interface ParkingContextInterface {
   setTickets: React.Dispatch<React.SetStateAction<Ticket[]>>;
   activeTab: string;
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  showNotification: (message: string, severity?: NotificationSeverity) => void;
 }
 
 const ParkingContext = createContext<ParkingContextInterface | null>(null);
-export let ticketId =0;
+export let ticketId = 0;
 
 const initialSpots: ParkingSpot[] = new Array(10)
   .fill(0)
   .map((_, i) => ({ vehicle: null, isOccupied: false, id: `A${i}`, level: 1 }));
 
 const ParkingProvider = ({ children }: ParkingProviderProps) => {
+  const { triggerNotification, NotificationComponent } =
+    useToastNotification("top-right");
   const [parkingSpots, setParkingSpots] = useState<ParkingSpot[]>(initialSpots);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [activeTab, setActiveTab] = useState("VEHICLE_ENTRY_FORM");
+
+  const showNotification = (
+    message: string,
+    severity: NotificationSeverity = "info"
+  ) => {
+    triggerNotification({
+      severity,
+      message,
+      duration: 5000,
+    });
+  };
 
   useEffect(() => {
     const prevTickets = localStorage.getItem("parking-tickets");
@@ -64,8 +81,17 @@ const ParkingProvider = ({ children }: ParkingProviderProps) => {
   }, [tickets, parkingSpots]);
   return (
     <ParkingContext.Provider
-      value={{ parkingSpots, tickets,activeTab,setActiveTab, setParkingSpots, setTickets }}
+      value={{
+        parkingSpots,
+        tickets,
+        activeTab,
+        setActiveTab,
+        setParkingSpots,
+        setTickets,
+        showNotification,
+      }}
     >
+      {NotificationComponent}
       {children}
     </ParkingContext.Provider>
   );

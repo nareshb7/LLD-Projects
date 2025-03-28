@@ -3,7 +3,7 @@ import { useParkingContext } from "../context";
 import { tabs } from "./config";
 
 const Tabs = () => {
-  const { setActiveTab } = useParkingContext();
+  const {activeTab, setActiveTab } = useParkingContext();
 
   const handleTabClick = (selectedTab: string) => {
     setActiveTab(selectedTab);
@@ -14,7 +14,7 @@ const Tabs = () => {
         <button
           key={tab.id}
           onClick={() => handleTabClick(tab.name)}
-          className="btn btn-primary"
+          className={`btn btn-primary ${activeTab === tab.name ? "active": ""}`}
         >
           {tab.title}
         </button>
