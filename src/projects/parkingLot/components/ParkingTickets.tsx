@@ -4,7 +4,6 @@ import { hourlyAmount } from "./ParkingLot";
 
 const ParkingTickets = () => {
   const { tickets } = useParkingContext();
-  console.log("tickets::::", tickets);
   return (
     <div className="parking-tickets">
       <h3 className="heading">Active Tickets</h3>

@@ -30,8 +30,6 @@ const ParkingLot = () => {
     const parkingSpot = parkingSpots.find((spot) => spot.id == spotId);
     const ticket = tickets.find((ticket) => ticket.spot == spotId);
 
-    console.log("tickdt::::", parkingSpot, ticket);
-
     if (parkingSpot && ticket) {
       let cnfrm = window.confirm(`Your payment is Rs: ${getPayment(ticket)}/-`);
       if (cnfrm) {
