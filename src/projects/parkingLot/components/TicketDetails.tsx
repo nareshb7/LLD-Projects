@@ -3,7 +3,7 @@ import { TicketDetailsProps } from "./ParkingTickets";
 import { getDurationInHrs, getPayment } from "./utils";
 import { BsCurrencyRupee } from "react-icons/bs";
 
-const TicketDetails = ({ ticket }: TicketDetailsProps) => {
+const TicketDetails = ({ ticket}: TicketDetailsProps) => {
   return (
     <div className="accordion-body my-2 text-center" style={{fontFamily: "math"}}>
       <table cellPadding={4} cellSpacing={2}>
@@ -21,6 +21,10 @@ const TicketDetails = ({ ticket }: TicketDetailsProps) => {
           <tr>
             <td>Vehicle Type</td>
             <td>{ticket.vehicle?.type}</td>
+          </tr>
+          <tr>
+            <td>Parked At</td>
+            <td>{ticket.spot}</td>
           </tr>
           <tr>
             <td>Entry Time</td>
