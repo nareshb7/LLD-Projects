@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaCar, FaTruck } from "react-icons/fa";
+import { MdElectricRickshaw } from "react-icons/md";
 import { RiEBikeFill } from "react-icons/ri";
 import { useParkingContext } from "../context/";
-import { findVehicleSlot, getPayment, removeVehicleFromParking } from "./utils";
-import { ParkingSpot, Ticket, VehicleType } from "../context/types";
+import { Ticket, VehicleType } from "../context/types";
 import Modal from "./Modal";
 import TicketDetails from "./TicketDetails";
 import { TabTypes } from "./config";
@@ -12,6 +12,7 @@ const vehicleIcons = {
   [VehicleType.BIKE]: <RiEBikeFill />,
   [VehicleType.CAR]: <FaCar />,
   [VehicleType.TRUCK]: <FaTruck />,
+  [VehicleType.AUTO]: <MdElectricRickshaw />,
 };
 export const getVehicle = (type: VehicleType | null) => {
   return type ? vehicleIcons[type] : null;

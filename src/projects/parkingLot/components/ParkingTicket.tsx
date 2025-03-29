@@ -1,6 +1,6 @@
 import React from "react";
 import { getVehicle } from "./ParkingLot";
-import { Ticket, VehicleType } from "../context/types";
+import { Ticket } from "../context/types";
 import { FaBarcode } from "react-icons/fa6";
 import { getDurationInHrs, getPayment } from "./utils";
 
@@ -20,6 +20,10 @@ const ParkingExitTicket = ({ ticket }: ParkingExitTicketProps) => {
         <span className="text-center fw-semibold">
           DATE: {new Date().toLocaleDateString()}
         </span>
+        <p className="m-0">
+          <span className="d-inline-block park-date">Vehicle Number</span>
+          <span>: {ticket?.vehicle?.plateNumber}</span>
+        </p>
         <p className="m-0">
           <span className="d-inline-block park-date">FROM</span>
           <span>: {ticket.entryTime}</span>

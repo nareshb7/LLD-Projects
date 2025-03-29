@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { BsCurrencyRupee } from "react-icons/bs";
 import { useParkingContext } from "../context";
-import { hourlyAmount, TabTypes } from "./config";
-import { findEmptySlot, parkVehicleIntoSlot } from "./utils";
-import { Ticket, Vehicle, VehicleType } from "../context/types";
-import { getVehicle } from "./ParkingLot";
-import { BiBarcode } from "react-icons/bi";
-import { FaBarcode } from "react-icons/fa6";
+import { Ticket, Vehicle } from "../context/types";
+import { hourlyAmount } from "./config";
+import Modal from "./Modal";
 import { ParkingEntryTicket } from "./ParkingTicket";
+import { findEmptySlot, parkVehicleIntoSlot } from "./utils";
+import FareDetails from "./FareDetails";
 
 const initalVehicleObj = {
   plateNumber: "",
@@ -33,10 +33,13 @@ const VehicleEntry = () => {
     tickets,
     setParkingSpots,
     setTickets,
-    setActiveTab,
     showNotification,
   } = useParkingContext();
   const [vehicle, setVehicle] = useState<Vehicle>(initalVehicleObj);
+  const [isVehicleParked, setIsVehicleParked] = useState(false);
+  const [latestParkingTicket, setLatestParkingTIcket] = useState<Ticket | null>(
+    null
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -97,8 +100,14 @@ const VehicleEntry = () => {
         "success"
       );
       setTickets((prev) => [...prev, ticket]);
-      // setActiveTab(TabTypes.PARKING_LOT);
+      setIsVehicleParked(true);
+      setLatestParkingTIcket(ticket);
     }
+  };
+
+  const handleEntryTicketModalClose = () => {
+    setIsVehicleParked(false);
+    setLatestParkingTIcket({} as Ticket);
   };
 
   return (
@@ -129,9 +138,9 @@ const VehicleEntry = () => {
                   required
                 >
                   <option>Select Vehicle Type</option>
-                  <option value="Bike">Bike</option>
-                  <option value="Car">Car</option>
-                  <option value="Truck">Truck</option>
+                  {
+                    Object.keys(hourlyAmount).map(type => <option key={type} value={type}>{type}</option>)
+                  }
                 </select>
               </label>
             </div>
@@ -143,7 +152,16 @@ const VehicleEntry = () => {
           </form>
         </div>
       </div>
-      {tickets[0] && <ParkingEntryTicket ticket={tickets[0]} />}
+      <FareDetails />
+      {isVehicleParked && (
+        <Modal
+          show={isVehicleParked}
+          onClose={handleEntryTicketModalClose}
+          showFooter={false}
+        >
+          <ParkingEntryTicket ticket={latestParkingTicket as Ticket} />
+        </Modal>
+      )}
     </div>
   );
 };

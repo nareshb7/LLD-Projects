@@ -4,11 +4,16 @@ import { TabTypes } from "./config";
 import { Ticket } from "../context/types";
 import Modal from "./Modal";
 import ParkingExitTicket from "./ParkingTicket";
-import { getPayment } from "./utils";
+import { getPayment, removeVehicleFromParking } from "./utils";
 
 const PaymentPage = () => {
-  const { removingVehicleTicket, setRemovingVehicleTicket, setActiveTab } =
-    useParkingContext();
+  const {
+    removingVehicleTicket,
+    setRemovingVehicleTicket,
+    setActiveTab,
+    setTickets,
+    setParkingSpots,
+  } = useParkingContext();
   const [paymentMethod, setPaymentMethod] = useState("");
   const [isPaid, setIsPaid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +37,12 @@ const PaymentPage = () => {
     setTimeout(() => {
       setIsPaid(true);
       setRemovingVehicleTicket({ ...(updatedTicket as Ticket) });
+      setTickets((prev) =>
+        prev.filter((ticket) => ticket.id !== updatedTicket.id)
+      );
+      setParkingSpots((prev) => [
+        ...removeVehicleFromParking(updatedTicket.spot || "", prev),
+      ]);
       setIsLoading(false);
     }, 2000);
   };

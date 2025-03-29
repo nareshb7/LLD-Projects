@@ -11,8 +11,8 @@ export enum TabTypes {
   PARKING_TICKETS = "PARKING_TICKETS",
   PARKING_LOT = "PARKING_LOT",
   SEARCH_VEHICLE = "SEARCH_VEHICLE",
-  INFO_PAGE= "INFO_PAGE",
-  PAYMENT_PAGE= "PAYMENT_PAGE"
+  INFO_PAGE = "INFO_PAGE",
+  PAYMENT_PAGE = "PAYMENT_PAGE",
 }
 
 export interface Tab {
@@ -51,11 +51,12 @@ export const TabsCompoent: { [key in TabTypes]: () => JSX.Element } = {
   PARKING_LOT: ParkingLot,
   SEARCH_VEHICLE: VehicleSearch,
   INFO_PAGE: ProjectDetails,
-  PAYMENT_PAGE: PaymentPage
+  PAYMENT_PAGE: PaymentPage,
 };
 
 export const hourlyAmount = {
   [VehicleType.BIKE]: 30,
+  [VehicleType.AUTO]: 40,
   [VehicleType.CAR]: 50,
   [VehicleType.TRUCK]: 65,
 };

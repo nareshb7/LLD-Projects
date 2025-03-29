@@ -4,6 +4,7 @@ export enum VehicleType {
   CAR = "Car",
   BIKE = "Bike",
   TRUCK = "Truck",
+  AUTO= "Auto",
 }
 
 export interface Vehicle {

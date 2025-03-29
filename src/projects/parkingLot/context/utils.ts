@@ -1,5 +1,5 @@
 import { VehicleType } from "./types";
-const types = [VehicleType.BIKE, VehicleType.CAR, VehicleType.TRUCK];
+const types = [VehicleType.BIKE,VehicleType.AUTO, VehicleType.CAR, VehicleType.TRUCK];
 
 export const getInitialSlots = (levels: number) => {
   return Array(levels)
