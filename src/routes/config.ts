@@ -5,6 +5,7 @@ import ProgressBar from "../projects/progressBar";
 import SearchBar from "../projects/searchBar";
 import Sudoku from "../projects/sudoku";
 import ToastNotification from "../projects/toastNotification";
+// Implement lazy loading
 
 export interface Project {
   id: number;
