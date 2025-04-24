@@ -90,7 +90,7 @@ const Sudoku = () => {
     <div className="sudoku-wrapper mx-auto my-2 ">
       <h3>Sudoku Puzzle</h3>
       <h5>Time: {convertSecondsToHours(timer)}</h5>
-      <div className="my-2 w-50">
+      <div className="my-2 w-50 mx-auto">
         <select
           className="form-select form-control"
           onChange={handleLevelChange}
@@ -114,7 +114,7 @@ const Sudoku = () => {
         />
       )}
 
-      <div className="mt-2 d-flex gap-2 text-center">
+      <div className="mt-2 d-flex gap-2 text-center justify-content-evenly">
         <button className="btn btn-info" onClick={handleCheck}>
           Check
         </button>
