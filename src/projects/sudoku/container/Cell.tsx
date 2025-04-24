@@ -21,7 +21,8 @@ const CellComp = ({
 }: BoardCellProps) => {
   return (
     <input
-      disabled={disabled}
+      // disabled={disabled}
+      readOnly={disabled}
       autoComplete="off"
       value={value.trim()}
       className={`form-control text-center m-0 p-2 ${className}`}

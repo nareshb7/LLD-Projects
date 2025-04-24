@@ -6,3 +6,7 @@
 .sudoku-wrapper .board-cell:focus {
   caret-color: transparent;
 }
+
+.sudoku-wrapper .bg-light-gray {
+  background-color: #e0e0e0 !important;
+}

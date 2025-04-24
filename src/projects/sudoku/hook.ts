@@ -36,7 +36,7 @@ const useSudoku = () => {
     newBoard[row][col].value = num;
     setBoard(newBoard);
     setLastValue(num);
-    if (newBoard[row][col].defaultValue !== num) {
+    if (newBoard[row][col].defaultValue !== num && num) {
       const newMistakeCount = mistakesCount + 1;
       let message = `This is wrong value you have only ${
         MISTAKES_LIMT - newMistakeCount
@@ -44,10 +44,13 @@ const useSudoku = () => {
       if (newMistakeCount == MISTAKES_LIMT) {
         message = "Game is over, 0 Chances left";
         setMistakeCount(0);
-        handleReset();
-        setSelectedLevel(null);
-        setCurrentSelected(null);
-        setLastValue(null);
+        // handle the animation of removing board from the dom
+        setTimeout(() => {
+          handleReset();
+          setSelectedLevel(null);
+          setCurrentSelected(null);
+          setLastValue(null);
+        }, 3000);
       } else {
         setMistakeCount(newMistakeCount);
       }

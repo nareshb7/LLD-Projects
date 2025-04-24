@@ -58,7 +58,7 @@ const Board = ({
                   }`}
                   className={`board-cell ${
                     col.isDefaultValue
-                      ? ""
+                      ? "bg-light-gray"
                       : col.value !== col.defaultValue
                       ? "text-danger"
                       : isSelected
