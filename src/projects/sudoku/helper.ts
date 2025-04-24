@@ -120,3 +120,17 @@ export const generateBoard = (level: Level) => {
   removeCells(board, levels[level] || 30);
   return board;
 };
+
+export const convertSecondsToHours = (time: number) => {
+  const minutes = Math.floor(time / 60);
+  let hours = Math.floor(minutes / 60);
+  let remainingMinutes = minutes % 60;
+  let seconds = time % 60;
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  if (hours > 0)
+    return `${pad(hours)}:${pad(remainingMinutes)}:${pad(seconds)}`;
+
+  return `${pad(remainingMinutes)}:${pad(seconds)}`;
+};
