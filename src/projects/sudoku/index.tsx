@@ -11,10 +11,24 @@ import {
 
 let timeOut;
 
+const convertSecondsToHours = (time: number) => {
+  const minutes = Math.floor(time / 60);
+  let hours = Math.floor(minutes / 60);
+  let remainingMinutes = minutes % 60;
+  let seconds = time % 60;
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  if (hours > 0)
+    return `${pad(hours)}:${pad(remainingMinutes)}:${pad(seconds)}`;
+
+  return `${pad(remainingMinutes)}:${pad(seconds)}`;
+};
+
 const genBoard = generateBoard("HARD");
 const Sudoku = () => {
   const [board, setBoard] = useState(genBoard);
-  const [selectedLevel, setSelectedLevel] = useState<Level | null>("MEDIUM");
+  const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   const [lastValue, setLastValue] = useState<number | null>(null);
   const [timer, setTimer] = useState(0);
   const [currentSelected, setCurrentSelected] = useState<number[] | null>(null);
@@ -25,6 +39,10 @@ const Sudoku = () => {
     timeOut = setInterval(() => {
       setTimer((prev) => prev + 1);
     }, 1000);
+  };
+
+  const clearTimer = () => {
+    clearInterval(timeOut);
   };
   const handleChange = (row: number, col: number, value: string) => {
     console.log("val::", value);
@@ -52,13 +70,14 @@ const Sudoku = () => {
     setSelectedLevel(value);
     if (value) {
       setBoard(generateBoard(value));
+      startTimer();
     }
   };
 
   const handleReset = () => {
     const updatedBoard = resetCurrentPuzzle(board);
     setBoard(updatedBoard);
-    clearInterval(timeOut);
+    clearTimer();
   };
 
   const handleNewGame = () => {
@@ -83,7 +102,7 @@ const Sudoku = () => {
   return (
     <div className="sudoku-wrapper mx-auto my-2 ">
       <h3>Sudoku Puzzle</h3>
-      <h5>Time: {timer}</h5>
+      <h5>Time: {convertSecondsToHours(timer)}</h5>
       <div className="my-2 w-50">
         <select
           className="form-select form-control"
@@ -98,13 +117,15 @@ const Sudoku = () => {
           ))}
         </select>
       </div>
-      <Board
-        selected={currentSelected as number[]}
-        board={board}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        lastValue={lastValue}
-      />
+      {selectedLevel && (
+        <Board
+          selected={currentSelected as number[]}
+          board={board}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          lastValue={lastValue}
+        />
+      )}
 
       <div className="mt-2 d-flex gap-2 text-center">
         <button className="btn btn-info" onClick={handleCheck}>
