@@ -3,11 +3,6 @@
   margin: 10 auto;
 }
 
-.sudoku-wrapper .input-box {
-  width: 30;
-  height: 30;
-  cursor: pointer;
-  font-weight: 600;
-  outline: none;
-  /* border: 1px; */
+.sudoku-wrapper .board-cell:focus {
+  caret-color: transparent;
 }

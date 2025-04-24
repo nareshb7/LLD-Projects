@@ -1,6 +1,7 @@
-import { Cell } from "./types";
+import { Cell, Level } from "./types";
 
-const SIZE = 9;
+export const SIZE = 9;
+
 const createEmptyBoard = (): Cell[][] => {
   return Array.from({ length: SIZE }, () =>
     Array.from(
@@ -14,8 +15,6 @@ const createEmptyBoard = (): Cell[][] => {
     )
   );
 };
-
-export type Level = "EASY" | "MEDIUM" | "HARD";
 
 const isSafe = (board: Cell[][], row: number, col: number, num: number) => {
   for (let x = 0; x < SIZE; x++) {

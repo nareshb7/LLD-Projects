@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Cell } from "../types";
 import CellComp from "./Cell";
+import { SIZE } from "../helper";
 
 export interface BoardProps {
   board: Cell[][];
@@ -18,6 +19,14 @@ const Board = ({
   onChange,
 }: BoardProps) => {
   const [sRow, sCol] = selected || [];
+  const numbersCount = {};
+  for (let row = 0; row < SIZE; row++) {
+    for (let col = 0; col < SIZE; col++) {
+      const val = board[row][col].value;
+      numbersCount[val] = (numbersCount[val] || 0) + 1;
+    }
+  }
+
   return (
     <div className="text-center m-4">
       {board.map((row, rowIndex) => {
@@ -47,9 +56,11 @@ const Board = ({
                       ? ""
                       : col.value
                   }`}
-                  className={`${
+                  className={`board-cell ${
                     col.isDefaultValue
                       ? ""
+                      : col.value !== col.defaultValue
+                      ? "text-danger"
                       : isSelected
                       ? "bg-secondary text-white "
                       : isRowHighlight || isColHighlight
@@ -91,6 +102,7 @@ const Board = ({
               className="btn btn-light"
               style={{ width: 40, height: 40 }}
               onClick={() => onChange(sRow, sCol, `${i + 1}`)}
+              disabled={numbersCount[i + 1] == 9}
             >
               {i + 1}
             </button>

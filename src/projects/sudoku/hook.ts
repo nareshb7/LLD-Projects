@@ -1,20 +1,19 @@
 import { useState } from "react";
-import {
-  generateBoard,
-  isSudokuValid,
-  Level,
-  resetCurrentPuzzle,
-} from "./helper";
+import { generateBoard, isSudokuValid, resetCurrentPuzzle } from "./helper";
+import { useSudokuContext } from "./context";
+import { Level } from "./types";
 
 let timeOut;
-
+export const MISTAKES_LIMT = 3;
 const genBoard = generateBoard("HARD");
 const useSudoku = () => {
+  const { toastNotification } = useSudokuContext();
   const [board, setBoard] = useState(genBoard);
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   const [lastValue, setLastValue] = useState<number | null>(null);
   const [timer, setTimer] = useState(0);
   const [currentSelected, setCurrentSelected] = useState<number[] | null>(null);
+  const [mistakesCount, setMistakeCount] = useState(0);
 
   const startTimer = () => {
     clearTimeout(timeOut);
@@ -26,19 +25,39 @@ const useSudoku = () => {
 
   const clearTimer = () => {
     clearInterval(timeOut);
+    setTimer(0);
   };
   const handleChange = (row: number, col: number, value: string) => {
-    console.log("val::", value);
     const num = parseInt(value[value.length - 1]) || 0;
     if (isNaN(num)) return;
 
     const newBoard = board.map((row) => [...row]);
+
     newBoard[row][col].value = num;
     setBoard(newBoard);
     setLastValue(num);
+    if (newBoard[row][col].defaultValue !== num) {
+      const newMistakeCount = mistakesCount + 1;
+      let message = `This is wrong value you have only ${
+        MISTAKES_LIMT - newMistakeCount
+      } chances left`;
+      if (newMistakeCount == MISTAKES_LIMT) {
+        message = "Game is over, 0 Chances left";
+        setMistakeCount(0);
+        handleReset();
+        setSelectedLevel(null);
+        setCurrentSelected(null);
+        setLastValue(null);
+      } else {
+        setMistakeCount(newMistakeCount);
+      }
+      toastNotification(message, "danger");
+
+      return;
+    }
     if (isSudokuValid(newBoard)) {
       const message = `Welldone, You have completed the Sudoku Puzzle`;
-      alert(message);
+      toastNotification(message, "success");
     }
   };
   const handleRemove = () => {
@@ -88,6 +107,7 @@ const useSudoku = () => {
     lastValue,
     timer,
     currentSelected,
+    mistakesCount,
     handleChange,
     handleFocus,
     handleCheck,
