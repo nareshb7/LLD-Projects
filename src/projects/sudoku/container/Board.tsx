@@ -7,6 +7,7 @@ export interface BoardProps {
   board: Cell[][];
   selected: number[];
   lastValue: number | null;
+  isBoardDisabled: boolean;
   onFocus: (rowIndex: number, colIndex: number) => void;
   onChange: (rowIndex: number, colIndex: number, value: string) => void;
 }
@@ -15,6 +16,7 @@ const Board = ({
   board,
   selected,
   lastValue,
+  isBoardDisabled,
   onFocus,
   onChange,
 }: BoardProps) => {
@@ -47,7 +49,7 @@ const Board = ({
               const isColHighlight = colIndex === sCol;
               return (
                 <CellComp
-                  disabled={col.isDefaultValue}
+                  disabled={isBoardDisabled}
                   key={colIndex}
                   value={`${
                     col.isDefaultValue
@@ -58,7 +60,7 @@ const Board = ({
                   }`}
                   className={`board-cell ${
                     col.isDefaultValue
-                      ? "bg-light-gray"
+                      ? "bg-light-gray fw-600"
                       : col.value !== col.defaultValue
                       ? "text-danger"
                       : isSelected
@@ -68,7 +70,10 @@ const Board = ({
                       : ""
                   } ${lastValue === col.value && "fw-bold text-primary"}`}
                   style={{
-                    cursor: col.isDefaultValue ? "not-allowed" : "pointer",
+                    cursor:
+                      col.isDefaultValue || isBoardDisabled
+                        ? "not-allowed"
+                        : "pointer",
                     borderLeft:
                       colIndex % 3 === 0 ? "2px solid #333" : "1px solid #ccc",
                     borderRight:
@@ -99,7 +104,7 @@ const Board = ({
           .map((_, i) => (
             <button
               key={i}
-              className="btn btn-light"
+              className="btn btn-light fw-bold"
               style={{ width: 40, height: 40 }}
               onClick={() => onChange(sRow, sCol, `${i + 1}`)}
               disabled={numbersCount[i + 1] == 9}

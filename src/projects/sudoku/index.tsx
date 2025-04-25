@@ -13,6 +13,7 @@ const Sudoku = () => {
     timer,
     currentSelected,
     mistakesCount,
+    isGamePaused,
     handleChange,
     handleFocus,
     handleCheck,
@@ -20,6 +21,7 @@ const Sudoku = () => {
     handleReset,
     handleNewGame,
     handleLevelChange,
+    handleGamePause,
   } = useSudoku();
   return (
     <div className="sudoku-wrapper mx-auto my-2 ">
@@ -30,6 +32,7 @@ const Sudoku = () => {
           className="form-select w-50"
           onChange={handleLevelChange}
           value={(selectedLevel || "") as string}
+          disabled={isGamePaused}
         >
           <option value="">Select Level</option>
           {Object.keys(levels).map((level) => (
@@ -52,21 +55,45 @@ const Sudoku = () => {
           onChange={handleChange}
           onFocus={handleFocus}
           lastValue={lastValue}
+          isBoardDisabled={isGamePaused}
         />
       )}
 
       <div className="mt-2 d-flex gap-2 text-center justify-content-evenly">
-        <button className="btn btn-info" onClick={handleCheck}>
+        <button
+          className="btn btn-info"
+          disabled={isGamePaused}
+          onClick={handleCheck}
+        >
           Check
         </button>
-        <button className="btn btn-secondary" onClick={handleRemove}>
+        <button
+          className="btn btn-secondary"
+          disabled={isGamePaused}
+          onClick={handleRemove}
+        >
           Remove
         </button>
-        <button className="btn btn-danger" onClick={handleReset}>
+        <button
+          className="btn btn-danger"
+          disabled={isGamePaused}
+          onClick={handleReset}
+        >
           Reset
         </button>
-        <button className="btn btn-primary" onClick={handleNewGame}>
+        <button
+          className="btn btn-primary"
+          disabled={isGamePaused}
+          onClick={handleNewGame}
+        >
           New Game
+        </button>
+        <button
+          className="btn btn-warning"
+          disabled={!selectedLevel}
+          onClick={handleGamePause}
+        >
+          {isGamePaused ? "Resume" : "Pause"}
         </button>
       </div>
     </div>

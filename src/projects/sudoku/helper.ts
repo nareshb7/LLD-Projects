@@ -36,27 +36,17 @@ const isSafe = (board: Cell[][], row: number, col: number, num: number) => {
 };
 const shuffle = (arr: number[]) => {
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1)); // Ensures j is in [0, i]
+    const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 };
-
-// const shuffle = (arr: number[]) => {
-//   for (let i = 0; i < SIZE; i++) {
-//     let j = Math.floor(Math.random() * i+1);
-//     console.log("number::", i, j);
-//     [arr[i], arr[j]] = [arr[j], arr[i]];
-//   }
-//   return arr;
-// };
 
 const solveBoard = (board: Cell[][]) => {
   for (let row = 0; row < SIZE; row++) {
     for (let col = 0; col < SIZE; col++) {
       if (board[row][col].value == 0) {
         const numbers = shuffle([...new Array(SIZE).keys()].map((n) => n + 1));
-        // console.log("number:::", numbers);
         for (const num of numbers) {
           if (isSafe(board, row, col, num)) {
             board[row][col].value = num;
@@ -110,7 +100,7 @@ export const isSudokuValid = (board: Cell[][]) => {
 export const levels = {
   EASY: 35,
   MEDIUM: 45,
-  HARD: 60,
+  HARD: 55,
 };
 
 export const generateBoard = (level: Level) => {

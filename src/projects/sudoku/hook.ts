@@ -14,10 +14,11 @@ const useSudoku = () => {
   const [timer, setTimer] = useState(0);
   const [currentSelected, setCurrentSelected] = useState<number[] | null>(null);
   const [mistakesCount, setMistakeCount] = useState(0);
+  const [isGamePaused, setIsGamePauesd] = useState(false);
 
-  const startTimer = () => {
+  const startTimer = (prevTime: number = 0) => {
     clearTimeout(timeOut);
-    setTimer(0);
+    setTimer(prevTime);
     timeOut = setInterval(() => {
       setTimer((prev) => prev + 1);
     }, 1000);
@@ -26,6 +27,10 @@ const useSudoku = () => {
   const clearTimer = () => {
     clearInterval(timeOut);
     setTimer(0);
+  };
+
+  const pauseTimer = () => {
+    clearInterval(timeOut);
   };
   const handleChange = (row: number, col: number, value: string) => {
     const num = parseInt(value[value.length - 1]) || 0;
@@ -61,6 +66,11 @@ const useSudoku = () => {
     if (isSudokuValid(newBoard)) {
       const message = `Welldone, You have completed the Sudoku Puzzle`;
       toastNotification(message, "success");
+      setTimeout(() => {
+        handleNewGame();
+        setCurrentSelected(null);
+        setLastValue(null);
+      }, 3000);
     }
   };
   const handleRemove = () => {
@@ -87,7 +97,6 @@ const useSudoku = () => {
 
   const handleNewGame = () => {
     const newBoard = generateBoard(selectedLevel as Level);
-    console.log("board:new", newBoard);
     setBoard(newBoard);
     startTimer();
   };
@@ -104,6 +113,15 @@ const useSudoku = () => {
     setCurrentSelected([row, col]);
     setLastValue(board[row][col].value || null);
   };
+
+  const handleGamePause = () => {
+    setIsGamePauesd(!isGamePaused);
+    if (!isGamePaused) {
+      pauseTimer();
+    } else {
+      startTimer(timer);
+    }
+  };
   return {
     board,
     selectedLevel,
@@ -111,6 +129,7 @@ const useSudoku = () => {
     timer,
     currentSelected,
     mistakesCount,
+    isGamePaused,
     handleChange,
     handleFocus,
     handleCheck,
@@ -118,6 +137,7 @@ const useSudoku = () => {
     handleReset,
     handleNewGame,
     handleLevelChange,
+    handleGamePause,
   };
 };
 
