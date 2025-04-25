@@ -30,7 +30,7 @@ const Board = ({
   }
 
   return (
-    <div className="text-center m-4">
+    <div className="text-center m-2">
       {board.map((row, rowIndex) => {
         return (
           <div

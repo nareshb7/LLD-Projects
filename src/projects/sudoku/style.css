@@ -1,8 +1,3 @@
-.sudoku-wrapper {
-  width: 500px;
-  margin: 10 auto;
-}
-
 .sudoku-wrapper .board-cell:focus {
   caret-color: transparent;
 }

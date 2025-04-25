@@ -43,7 +43,7 @@ const useSudoku = () => {
     setLastValue(num);
     if (newBoard[row][col].defaultValue !== num && num) {
       const newMistakeCount = mistakesCount + 1;
-      let message = `This is wrong value you have only ${
+      let message = `Entered value is wrong, you have only ${
         MISTAKES_LIMT - newMistakeCount
       } chances left`;
       if (newMistakeCount == MISTAKES_LIMT) {

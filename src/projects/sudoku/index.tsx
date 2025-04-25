@@ -24,7 +24,7 @@ const Sudoku = () => {
     handleGamePause,
   } = useSudoku();
   return (
-    <div className="sudoku-wrapper mx-auto my-2 ">
+    <div className="sudoku-wrapper mx-auto my-2 col-12 col-sm-6 col-lg-4 px-1">
       <h3>Sudoku Puzzle</h3>
       <h5>Time: {convertSecondsToHours(timer)}</h5>
       <div className="my-2  mx-auto d-flex justify-content-evenly text-center">

@@ -22,7 +22,7 @@ const CellComp = ({
   return (
     <input
       disabled={disabled}
-      readOnly={disabled}
+      readOnly={true}
       autoComplete="off"
       value={value.trim()}
       className={`form-control text-center m-0 p-2 ${className}`}
