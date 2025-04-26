@@ -25,6 +25,7 @@ Some of the upcoming projects might include:
 - Carousel/Slider
 - Form validation systems
 - Tabs
+- Sudoku
 - Customizable tooltips
 - And many more...
 
