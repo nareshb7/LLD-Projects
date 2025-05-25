@@ -5,18 +5,23 @@ import useToastNotification, {
 } from "../../../hooks/useToastNotification";
 import { ParkingContextInterface, ParkingSpot, Ticket } from "./types";
 import { getInitialSlots } from "./utils";
+import { TabTypes } from "../components/config";
 
 const ParkingContext = createContext<ParkingContextInterface | null>(null);
 
 const ParkingProvider = ({ children }: ParkingProviderProps) => {
   const { triggerNotification, NotificationComponent } =
     useToastNotification("top-right");
-  const [parkingSpots, setParkingSpots] = useState<ParkingSpot[][]>(getInitialSlots(5));
-  const [collectedAmount,setCollectedAmount] = useState<number>(0)
+  const [parkingSpots, setParkingSpots] = useState<ParkingSpot[][]>(
+    getInitialSlots(5)
+  );
+  const [collectedAmount, setCollectedAmount] = useState<number>(0);
   const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [activeTab, setActiveTab] = useState("VEHICLE_ENTRY_FORM");
+  const [activeTab, setActiveTab] = useState<TabTypes>(
+    TabTypes.VEHICLE_ENTRY_FORM
+  );
   const [removingVehicleTicket, setRemovingVehicleTicket] =
-      useState<Ticket | null>(null);
+    useState<Ticket | null>(null);
 
   const showNotification = (
     message: string,
@@ -57,7 +62,7 @@ const ParkingProvider = ({ children }: ParkingProviderProps) => {
         setTickets,
         showNotification,
         setCollectedAmount,
-        setRemovingVehicleTicket
+        setRemovingVehicleTicket,
       }}
     >
       {NotificationComponent}

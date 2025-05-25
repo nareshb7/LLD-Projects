@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCar, FaTruck } from "react-icons/fa";
 import { MdElectricRickshaw } from "react-icons/md";
 import { RiEBikeFill } from "react-icons/ri";
@@ -7,6 +7,10 @@ import { Ticket, VehicleType } from "../context/types";
 import Modal from "./Modal";
 import TicketDetails from "./TicketDetails";
 import { TabTypes } from "./config";
+import { getPayment, processPayment } from "./utils";
+import axios from "axios";
+
+export const SERVER_URL = "http://localhost:1111";
 
 const vehicleIcons = {
   [VehicleType.BIKE]: <RiEBikeFill />,
@@ -26,6 +30,8 @@ const ParkingLot = () => {
     setActiveTab,
     setRemovingVehicleTicket,
   } = useParkingContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleExit = (spotId: string) => {
     const ticket = tickets.find((ticket) => ticket.spot == spotId);
@@ -35,14 +41,25 @@ const ParkingLot = () => {
   const handleExitCancel = () => {
     setRemovingVehicleTicket(null);
   };
-  const handleExitConfirm = () => {
-    // setTickets((prev) =>
-    //   prev.filter((tkt) => tkt.spot !== removingVehicleTicket?.id || "")
-    // );
-    // setParkingSpots((prev) => [
-    //   ...removeVehicleFromParking(removingVehicleTicket?.id || "", prev),
-    // ]);
-    setActiveTab(TabTypes.PAYMENT_PAGE);
+  const handleExitConfirm = async () => {
+    try {
+      setIsLoading(true);
+      sessionStorage.setItem(
+        "removing_ticket",
+        JSON.stringify(removingVehicleTicket)
+      );
+      await processPayment(removingVehicleTicket as Ticket);
+      // setActiveTab(TabTypes.PAYMENT_SUCCESS);
+      setIsLoading(false);
+    } catch (err) {
+      sessionStorage.removeItem("removing_ticket");
+      setErrorMessage(err.response.data?.err?.error?.description);
+      setIsLoading(false);
+      setRemovingVehicleTicket({} as Ticket);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
   };
   return (
     <>
@@ -95,8 +112,12 @@ const ParkingLot = () => {
           onSave={handleExitConfirm}
           title="Vehicle Details"
           saveButtonName="Proceed to Payment"
+          isLoading={isLoading}
+          showFooter={!Boolean(errorMessage)}
         >
-          {removingVehicleTicket?.id ? (
+          {errorMessage ? (
+            <p className="text-center text-danger">{errorMessage}</p>
+          ) : removingVehicleTicket?.id ? (
             <TicketDetails ticket={removingVehicleTicket as Ticket} />
           ) : (
             <></>

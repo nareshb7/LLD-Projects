@@ -1,6 +1,7 @@
 import FileExplorer from "../projects/fileExplorer";
 import NestedCheckbox from "../projects/nestedCheckboxes";
 import VehicleParking from "../projects/parkingLot";
+import PaymentSuccess from "../projects/parkingLot/components/PaymentSuccess";
 import ProgressBar from "../projects/progressBar";
 import SearchBar from "../projects/searchBar";
 import Sudoku from "../projects/sudoku";
@@ -12,6 +13,7 @@ export interface Project {
   name: string;
   path: string;
   Component: () => JSX.Element;
+  children?: any;
 }
 
 export const projectsConfig: Project[] = [
@@ -50,6 +52,14 @@ export const projectsConfig: Project[] = [
     name: "Parking Lot",
     path: "parking-lot",
     Component: VehicleParking,
+    children: [
+      {
+        id: 1,
+        name: "Payment Success",
+        path: "payment-success",
+        Component: PaymentSuccess,
+      },
+    ],
   },
   {
     id: 7,

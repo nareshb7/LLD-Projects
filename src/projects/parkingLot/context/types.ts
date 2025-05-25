@@ -1,10 +1,11 @@
 import { NotificationSeverity } from "../../../hooks/useToastNotification";
+import { TabTypes } from "../components/config";
 
 export enum VehicleType {
   CAR = "Car",
   BIKE = "Bike",
   TRUCK = "Truck",
-  AUTO= "Auto",
+  AUTO = "Auto",
 }
 
 export interface Vehicle {
@@ -17,7 +18,7 @@ export interface ParkingSpot {
   id: string;
   level: number;
   isOccupied: boolean;
-  type: VehicleType,
+  type: VehicleType;
 }
 
 export interface Ticket {
@@ -34,8 +35,8 @@ export interface ParkingContextInterface {
   setParkingSpots: React.Dispatch<React.SetStateAction<ParkingSpot[][]>>;
   tickets: Ticket[];
   setTickets: React.Dispatch<React.SetStateAction<Ticket[]>>;
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  activeTab: TabTypes;
+  setActiveTab: React.Dispatch<React.SetStateAction<TabTypes>>;
   showNotification: (message: string, severity?: NotificationSeverity) => void;
   collectedAmount: number;
   setCollectedAmount: React.Dispatch<React.SetStateAction<number>>;

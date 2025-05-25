@@ -5,6 +5,7 @@ import VehicleSearch from "./VehicleSearch";
 import { VehicleType } from "../context/types";
 import ProjectDetails from "./ProjectDetails";
 import PaymentPage from "./PaymentPage";
+import PaymentSuccess from "./PaymentSuccess";
 
 export enum TabTypes {
   VEHICLE_ENTRY_FORM = "VEHICLE_ENTRY_FORM",
@@ -13,6 +14,7 @@ export enum TabTypes {
   SEARCH_VEHICLE = "SEARCH_VEHICLE",
   INFO_PAGE = "INFO_PAGE",
   PAYMENT_PAGE = "PAYMENT_PAGE",
+  PAYMENT_SUCCESS = "PAYMENT_SUCCESS",
 }
 
 export interface Tab {
@@ -52,6 +54,7 @@ export const TabsCompoent: { [key in TabTypes]: () => JSX.Element } = {
   SEARCH_VEHICLE: VehicleSearch,
   INFO_PAGE: ProjectDetails,
   PAYMENT_PAGE: PaymentPage,
+  PAYMENT_SUCCESS: PaymentSuccess,
 };
 
 export const hourlyAmount = {

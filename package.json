@@ -3,16 +3,24 @@
   "version": "1.0.0",
   "description": "Low level design projects",
   "homepage": "/LLD-Projects",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel public/index.html",
     "build": "parcel build public/index.html --public-url /LLD-Projects/",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "server": "nodemon server/index.js"
   },
   "author": "Naresh Baleboina",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "razorpay": "^2.9.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
@@ -22,6 +30,7 @@
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "buffer": "^6.0.3",
     "gh-pages": "^6.2.0",
     "parcel": "^2.13.0",
     "process": "^0.11.10",

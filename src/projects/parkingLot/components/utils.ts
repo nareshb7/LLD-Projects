@@ -1,5 +1,7 @@
 import { ParkingSpot, Ticket, Vehicle, VehicleType } from "../context/types";
 import { hourlyAmount } from "./config";
+import { SERVER_URL } from "./ParkingLot";
+import axios from "axios";
 
 export const findVehicleSlot = (
   slotId: string,
@@ -74,4 +76,40 @@ export const getPayment = (ticket: Ticket) => {
   const perHour = hourlyAmount[ticket?.vehicle?.type || ""];
 
   return (duration * perHour).toFixed(2);
+};
+
+export const processPayment = async (ticket: Ticket) => {
+  const amount = getPayment(ticket as Ticket);
+  const receipt = ticket?.vehicle?.plateNumber + " | " + ticket?.entryTime;
+
+  const { data } = await axios.post(SERVER_URL + "/api/v1/process-payment", {
+    amount,
+    receipt,
+  });
+  const { order, key } = data;
+
+  console.log("removingVeh::", order, key);
+
+  // Open Razorpay Checkout
+  const options = {
+    key, // Replace with your Razorpay key_id
+    amount: amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    currency: "INR",
+    name: "N Parking Service",
+    description: "Test Transaction",
+    order_id: order.id, // This is the order_id created in the backend
+    callback_url: "http://localhost:1111/api/v1/payment-success", // Your success URL
+
+    prefill: {
+      name: "Naresh Baleboina",
+      email: "nareshbjava7@gmail.com",
+      contact: "9010586402",
+    },
+    theme: {
+      color: "#F37254",
+    },
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
 };

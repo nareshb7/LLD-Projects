@@ -3,10 +3,13 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { projectsConfig } from "./config";
 
-const projectRoutes = projectsConfig.map(({ path, Component }) => ({
-  path,
-  Component,
-}));
+const projectRoutes = projectsConfig.map(
+  ({ path, Component, children = [] }) => ({
+    path,
+    Component,
+    children,
+  })
+);
 
 const router = createBrowserRouter(
   [
