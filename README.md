@@ -1,42 +1,54 @@
-# Low-Level Design (LLD) Projects with React
+# React + TypeScript + Vite
 
-Welcome to the repository dedicated to creating **Low-Level Design (LLD)** projects using **React**. This repository is created to showcase and practice various LLD concepts by building small, reusable, and scalable projects. 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Projects
+Currently, two official plugins are available:
 
-### ✅ Completed Project: Toast Notification
-The first project added to this repository is a **Toast Notification**. It is a simple, customizable notification system that can be used to alert users about various actions or events. 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Features**:
-  - Configurable position, duration, and appearance.
-  - Animation for showing and hiding notifications.
-  - Auto-close after a set duration with a smooth animation.
-  - Dynamic notification updates (can be customized with content and styles).
+## Expanding the ESLint configuration
 
----
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Future Projects
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-In the future, I plan to add many more **Low-Level Design projects** to this repository. The goal is to keep building small projects that demonstrate fundamental concepts of LLD and how they can be implemented in **React**.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Some of the upcoming projects might include:
-- Modal windows
-- Dropdown menus
-- Carousel/Slider
-- Form validation systems
-- Tabs
-- Sudoku
-- Customizable tooltips
-- And many more...
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-Each project will be designed with a focus on **scalability**, **reusability**, and **best practices** in React development.
-
----
-
-## Getting Started
-
-To get started with any of the projects in this repository:
-
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/nareshb7/LLD-Projects.git
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```

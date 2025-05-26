@@ -5,35 +5,29 @@
   "homepage": "/LLD-Projects",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel public/index.html",
-    "build": "parcel build public/index.html --public-url /LLD-Projects/",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "server": "nodemon server/index.js"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "author": "Naresh Baleboina",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.9.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "nodemon": "^3.1.10",
-    "razorpay": "^2.9.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-icons": "^5.3.0",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "axios": "^1.9.0"
   },
   "devDependencies": {
-    "@types/node": "^22.9.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "buffer": "^6.0.3",
-    "gh-pages": "^6.2.0",
-    "parcel": "^2.13.0",
-    "process": "^0.11.10",
-    "typescript": "^5.6.3"
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5"
   }
 }
