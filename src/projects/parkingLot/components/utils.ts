@@ -73,7 +73,7 @@ export const getDurationInHrs = (ticket: Ticket) => {
 
 export const getPayment = (ticket: Ticket) => {
   const duration = getDurationInHrs(ticket);
-  const perHour = hourlyAmount[ticket?.vehicle?.type || ""];
+  const perHour = hourlyAmount[ticket?.vehicle?.type || "Bike"];
 
   return (duration * perHour).toFixed(2);
 };

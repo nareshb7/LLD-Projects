@@ -4,7 +4,7 @@ export interface ModalProps {
   show: boolean;
   onClose: () => void;
   title?: string;
-  children: JSX.Element;
+  children: React.JSX.Element;
   showFooter?: boolean;
   onSave?: () => void;
   saveButtonName?: string;

@@ -51,9 +51,9 @@ const ParkingLot = () => {
       await processPayment(removingVehicleTicket as Ticket);
       // setActiveTab(TabTypes.PAYMENT_SUCCESS);
       setIsLoading(false);
-    } catch (err) {
+    } catch (err: any) {
       sessionStorage.removeItem("removing_ticket");
-      setErrorMessage(err.response.data?.err?.error?.description);
+      setErrorMessage(err?.response?.data?.err?.error?.description);
       setIsLoading(false);
       setRemovingVehicleTicket({} as Ticket);
       setTimeout(() => {

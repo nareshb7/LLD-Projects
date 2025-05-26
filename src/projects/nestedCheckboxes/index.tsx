@@ -159,7 +159,7 @@ const NestedCheckbox = () => {
   //   }
   // };
 
-  const handleExpandClick = (selectedBox) => {
+  const handleExpandClick = (selectedBox: CheckboxModal) => {
     const copiedData = { ...checkboxData };
     const checkExpand = (
       checkbox: CheckboxModal,

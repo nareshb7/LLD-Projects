@@ -9,7 +9,7 @@ const Bar = ({ progress }: BarProps) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    let interval;
+    let interval: number;
     setValue(progress);
     interval = setInterval(() => {
       setValue((prev) => {

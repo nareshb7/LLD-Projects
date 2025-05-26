@@ -1,3 +1,4 @@
+import React from "react";
 import FileExplorer from "../projects/fileExplorer";
 import NestedCheckbox from "../projects/nestedCheckboxes";
 import VehicleParking from "../projects/parkingLot";
@@ -12,7 +13,7 @@ export interface Project {
   id: number;
   name: string;
   path: string;
-  Component: () => JSX.Element;
+  Component: () => React.JSX.Element;
   children?: any;
 }
 

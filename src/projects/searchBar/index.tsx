@@ -22,7 +22,7 @@ const SearchBar = () => {
       if (success && data) {
         setSuggestions(data);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("get_api_error::", err.message);
       setSuggestions([]);
     } finally {

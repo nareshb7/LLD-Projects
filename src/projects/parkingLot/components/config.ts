@@ -6,6 +6,7 @@ import { VehicleType } from "../context/types";
 import ProjectDetails from "./ProjectDetails";
 import PaymentPage from "./PaymentPage";
 import PaymentSuccess from "./PaymentSuccess";
+import React from "react";
 
 export enum TabTypes {
   VEHICLE_ENTRY_FORM = "VEHICLE_ENTRY_FORM",
@@ -47,7 +48,7 @@ export const tabs: Tab[] = [
   },
 ];
 
-export const TabsCompoent: { [key in TabTypes]: () => JSX.Element } = {
+export const TabsCompoent: { [key in TabTypes]: () => React.JSX.Element } = {
   VEHICLE_ENTRY_FORM: VehicleEntry,
   PARKING_TICKETS: ParkingTickets,
   PARKING_LOT: ParkingLot,

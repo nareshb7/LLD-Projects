@@ -21,7 +21,7 @@ const Board = ({
   onChange,
 }: BoardProps) => {
   const [sRow, sCol] = selected || [];
-  const numbersCount = {};
+  const numbersCount: Record<number, number> = {};
   for (let row = 0; row < SIZE; row++) {
     for (let col = 0; col < SIZE; col++) {
       const val = board[row][col].value;
