@@ -23,7 +23,6 @@ const SearchBar = () => {
         setSuggestions(data);
       }
     } catch (err: any) {
-      console.error("get_api_error::", err.message);
       setSuggestions([]);
     } finally {
       setIsLoading(false);

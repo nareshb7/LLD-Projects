@@ -3,7 +3,7 @@ import { generateBoard, isSudokuValid, resetCurrentPuzzle } from "./helper";
 import { useSudokuContext } from "./context";
 import { Level } from "./types";
 
-let timeOut: number;
+let timeOut: NodeJS.Timeout;
 export const MISTAKES_LIMT = 3;
 const genBoard = generateBoard("HARD");
 const useSudoku = () => {

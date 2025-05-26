@@ -41,7 +41,12 @@ const ParkingLot = () => {
   const handleExitCancel = () => {
     setRemovingVehicleTicket(null);
   };
+  const isRazorpayConnected = false;
   const handleExitConfirm = async () => {
+    if (!isRazorpayConnected) {
+      setActiveTab(TabTypes.PAYMENT_PAGE);
+      return;
+    }
     try {
       setIsLoading(true);
       sessionStorage.setItem(
@@ -49,7 +54,6 @@ const ParkingLot = () => {
         JSON.stringify(removingVehicleTicket)
       );
       await processPayment(removingVehicleTicket as Ticket);
-      // setActiveTab(TabTypes.PAYMENT_SUCCESS);
       setIsLoading(false);
     } catch (err: any) {
       sessionStorage.removeItem("removing_ticket");

@@ -1,0 +1,39 @@
+.nested-comments-section .main-comment {
+  display: flex;
+  gap: 10px;
+  margin: 5px;
+  align-items: center;
+}
+
+.nested-comments-section .comment-input {
+  width: 100%;
+}
+
+.nested-comments-section .comment {
+  margin: 5px;
+  background-color: aliceblue;
+  padding-left: 10px;
+  border: 1px solid #888;
+}
+.nested-comments-section .action-button {
+  margin: 5px;
+  border-radius: 7px;
+  background-color: aliceblue;
+}
+
+.nested-comments-section .comment-content {
+  padding: 5px 0;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.nested-comments-section .comment-info {
+  /* padding: 5px; */
+  font-size: 14px;
+  margin: 0;
+}
+.nested-comments-section .comment-author {
+  font-weight: bold;
+  margin: 0;
+}

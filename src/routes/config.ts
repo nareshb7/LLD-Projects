@@ -1,6 +1,7 @@
 import React from "react";
 import FileExplorer from "../projects/fileExplorer";
 import NestedCheckbox from "../projects/nestedCheckboxes";
+import NestedCommentsWrapper from "../projects/nestedComments";
 import VehicleParking from "../projects/parkingLot";
 import PaymentSuccess from "../projects/parkingLot/components/PaymentSuccess";
 import ProgressBar from "../projects/progressBar";
@@ -67,5 +68,11 @@ export const projectsConfig: Project[] = [
     name: "Sudoku",
     path: "sudkou",
     Component: Sudoku,
+  },
+  {
+    id: 8,
+    name: "Nested Comments",
+    path: "nested-comments",
+    Component: NestedCommentsWrapper,
   },
 ];

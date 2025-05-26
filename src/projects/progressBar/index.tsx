@@ -9,7 +9,7 @@ const Bar = ({ progress }: BarProps) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    let interval: number;
+    let interval: NodeJS.Timeout;
     setValue(progress);
     interval = setInterval(() => {
       setValue((prev) => {

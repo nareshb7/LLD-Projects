@@ -88,8 +88,6 @@ export const processPayment = async (ticket: Ticket) => {
   });
   const { order, key } = data;
 
-  console.log("removingVeh::", order, key);
-
   // Open Razorpay Checkout
   const options = {
     key, // Replace with your Razorpay key_id
