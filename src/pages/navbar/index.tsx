@@ -6,7 +6,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-      <Link className="navbar-brand" to="/">LLD Projects</Link>
+        <Link className="navbar-brand" to="/">
+          LLD Projects
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -19,7 +21,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+          <ul className="navbar-nav ms-auto flex-wrap">
             {projectsConfig.map(({ name, path, id }) => (
               <li key={id} className="nav-item">
                 <NavLink className="nav-link" to={path}>

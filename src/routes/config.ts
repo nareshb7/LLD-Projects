@@ -7,6 +7,7 @@ import PaymentSuccess from "../projects/parkingLot/components/PaymentSuccess";
 import ProgressBar from "../projects/progressBar";
 import SearchBar from "../projects/searchBar";
 import Sudoku from "../projects/sudoku";
+import TextToSpeech from "../projects/textToSpeech";
 import ToastNotification from "../projects/toastNotification";
 // Implement lazy loading
 
@@ -74,5 +75,11 @@ export const projectsConfig: Project[] = [
     name: "Nested Comments",
     path: "nested-comments",
     Component: NestedCommentsWrapper,
+  },
+  {
+    id: 9,
+    name: "Text to Speech",
+    path: "text-speech",
+    Component: TextToSpeech,
   },
 ];
