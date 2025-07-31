@@ -6,6 +6,7 @@ import VehicleParking from "../projects/parkingLot";
 import PaymentSuccess from "../projects/parkingLot/components/PaymentSuccess";
 import ProgressBar from "../projects/progressBar";
 import SearchBar from "../projects/searchBar";
+import SpeechToTextComponent from "../projects/speechToText";
 import Sudoku from "../projects/sudoku";
 import TextToSpeech from "../projects/textToSpeech";
 import ToastNotification from "../projects/toastNotification";
@@ -81,5 +82,10 @@ export const projectsConfig: Project[] = [
     name: "Text to Speech",
     path: "text-speech",
     Component: TextToSpeech,
+  }, {
+    id: 10,
+    name: "Speech to Text",
+    path: "speech-to-text",
+    Component: SpeechToTextComponent,
   },
 ];
